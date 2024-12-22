@@ -1,0 +1,29 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: backend
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://forex-db:5432/forex_db
+    username: forex_db_user
+    password: mF4!pX9@rQ2^sH6&
+  devtools:
+    restart:
+      enabled: true
+      livereload:
+        enabled: true
+  logging:
+    level:
+      root: INFO
+      org.springframework.security: DEBUG
+
+yogaforex:
+  app:
+    jwtSecret: U0maNEKL0Uv3mA6YR97N3qY+s3ccdTcdD57fETUN1fA=

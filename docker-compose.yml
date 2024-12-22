@@ -1,0 +1,43 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    networks:
+      - microservices-network
+    depends_on:
+      - forex-db
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://forex-db:5432/forex_db
+      - SPRING_DATASOURCE_USERNAME=forex_db_user
+      - SPRING_DATASOURCE_PASSWORD=mF4!pX9@rQ2^sH6&
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+
+  forex-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: forex_db
+      POSTGRES_USER: forex_db_user
+      POSTGRES_PASSWORD: mF4!pX9@rQ2^sH6&
+    volumes:
+      - forex-data:/var/lib/postgresql/data
+    networks:
+      - microservices-network
+    ports:
+      - "5435:5432"
+
+networks:
+  microservices-network:
+    driver: bridge
+
+volumes:
+  forex-data:
