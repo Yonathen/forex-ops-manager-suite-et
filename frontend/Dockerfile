@@ -1,11 +1,24 @@
-FROM node:alpine
+# Stage 1: Build Angular app
+FROM node:22:alpine as build-stage
 
-WORKDIR /usr/src/app
-
-COPY . /usr/src/app
-
-RUN npm install -g @angular/cli
-
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
+COPY . .
+RUN npm run build --configuration production
 
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+# Stage 2: Serve Angular app with NGINX
+FROM nginx:alpine
+
+WORKDIR /usr/share/nginx/html
+RUN rm -rf ./*
+
+# Copy Angular build files from the previous stage
+COPY --from=build-stage /app/dist/<app-name> ./
+
+# Copy custom NGINX configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

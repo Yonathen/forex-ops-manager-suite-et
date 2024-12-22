@@ -2,9 +2,8 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
     ports:
-      - "8001:8001"
+      - "8080:8080"
     networks:
       - microservices-network
     depends_on:
@@ -18,9 +17,10 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
     ports:
-      - "4200:4200"
+      - "80:80"
+    depends_on:
+      - backend
 
   forex-db:
     image: postgres:latest
