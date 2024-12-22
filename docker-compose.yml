@@ -4,8 +4,6 @@ services:
       context: ./backend
     ports:
       - "8080:8080"
-    networks:
-      - microservices-network
     depends_on:
       - forex-db
     environment:
@@ -30,14 +28,9 @@ services:
       POSTGRES_PASSWORD: mF4!pX9@rQ2^sH6&
     volumes:
       - forex-data:/var/lib/postgresql/data
-    networks:
-      - microservices-network
     ports:
       - "5435:5432"
 
-networks:
-  microservices-network:
-    driver: bridge
-
 volumes:
   forex-data:
+      driver: local
