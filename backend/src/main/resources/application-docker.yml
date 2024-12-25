@@ -27,3 +27,4 @@ spring:
 yogaforex:
   app:
     jwtSecret: U0maNEKL0Uv3mA6YR97N3qY+s3ccdTcdD57fETUN1fA=
+    jwtExpirationMs: 86400000
