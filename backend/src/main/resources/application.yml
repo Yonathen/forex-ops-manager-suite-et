@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: forex-service
+    name: backend
   jpa:
     hibernate:
       ddl-auto: update
@@ -11,7 +11,20 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://localhost:5433/yukel_forex_db
-    username: yukel_forex_user
-    password: yukel_forex_password
+    url: jdbc:postgresql://localhost:5435/forex_db
+    username: forex_db_user
+    password: mF4!pX9@rQ2^sH6&
+  devtools:
+    restart:
+      enabled: true
+      livereload:
+        enabled: true
+  logging:
+    level:
+      root: INFO
+      org.springframework.security: DEBUG
 
+yogaforex:
+  app:
+    jwtSecret: U0maNEKL0Uv3mA6YR97N3qY+s3ccdTcdD57fETUN1fA=
+    jwtExpirationMs: 86400000
