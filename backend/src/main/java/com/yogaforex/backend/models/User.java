@@ -10,7 +10,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -55,6 +59,17 @@ public class User {
     @Enumerated(EnumType.STRING)
     private EStatus status = EStatus.ACTIVE;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn( name = "address_id" )
+    private Address address;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn( name = "branch_id" )
+    private Branch branch;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Customer> customers = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
@@ -62,4 +77,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
+
+    @CreatedDate
+    @Column(updatable = false) // Ensure it's not updated
+    private LocalDateTime createDate;
+
+    @LastModifiedDate
+    private LocalDateTime updateDate;
 }
