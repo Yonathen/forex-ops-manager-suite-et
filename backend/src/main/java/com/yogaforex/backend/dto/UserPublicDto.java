@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -21,5 +22,7 @@ public class UserPublicDto {
     private String email;
     private EStatus status;
     private Set<RoleDto> roles;
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
 }
 

@@ -1,12 +1,13 @@
 package com.yogaforex.backend.dto;
 
-import com.yogaforex.backend.enums.EStatus;
+import com.yogaforex.backend.models.Address;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -14,15 +15,12 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class BranchDto {
     private UUID id;
-    private String username;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private EStatus status;
-    private Set<RoleDto> roles;
+    private String branchCode;
+    private String name;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
+    private Address address;
+    private Set<UserPublicDto> users = new HashSet<>();
 }

@@ -74,6 +74,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/users/**").permitAll()
+                                .requestMatchers("/api/branches/**").permitAll()
                                 // .antMatchers("/admin/**").hasAuthority("USER_MANAGEMENT_WRITE") // Example for using authorization
                                 .requestMatchers(// -- Swagger UI v2
                                         "/v2/api-docs",
