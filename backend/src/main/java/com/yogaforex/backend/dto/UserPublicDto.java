@@ -14,10 +14,9 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class UserPublicDto {
     private UUID id;
     private String username;
-    private String password;
     private String firstName;
     private String lastName;
     private String email;
@@ -26,3 +25,4 @@ public class UserDto {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 }
+
