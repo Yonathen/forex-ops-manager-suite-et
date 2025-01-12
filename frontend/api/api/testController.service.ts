@@ -28,7 +28,7 @@ import { Configuration }                                     from '../configurat
 })
 export class TestControllerService {
 
-    protected basePath = 'http://localhost:8080';
+    protected basePath = 'http://128.199.63.45:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
