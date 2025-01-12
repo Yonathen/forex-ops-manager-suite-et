@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {PanelMenu} from 'primeng/panelmenu';
 import {BadgeModule} from 'primeng/badge';
-import {Ripple} from 'primeng/ripple';
 import {CommonModule} from '@angular/common';
 import {MenuItem, MenuItemCommandEvent} from 'primeng/api';
 import {AuthService} from '../auth/service/auth.service';
@@ -13,7 +12,6 @@ import {AuthService} from '../auth/service/auth.service';
     RouterOutlet,
     PanelMenu,
     BadgeModule,
-    Ripple,
     CommonModule
   ],
   standalone: true,

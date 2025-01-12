@@ -34,7 +34,7 @@ import { Configuration }                                     from '../configurat
 })
 export class UserControllerService {
 
-    protected basePath = 'http://localhost:8001';
+    protected basePath = 'http://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
