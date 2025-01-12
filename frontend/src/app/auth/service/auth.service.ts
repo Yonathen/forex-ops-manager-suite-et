@@ -1,15 +1,22 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {AuthControllerService, RoleDto, UserDto, UserPublicDto} from '../../../../api';
 import StatusEnum = UserPublicDto.StatusEnum;
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import NameEnum = RoleDto.NameEnum;
+import {Router} from '@angular/router';
+import {APP_DATA_STORAGE} from '../../shared/provider/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(private authControllerService: AuthControllerService) { }
+  constructor(
+    @Inject(APP_DATA_STORAGE) private storage: Storage,
+    private authControllerService: AuthControllerService,
+    private router: Router
+  ) { }
 
   castToAccount(formValue: any, create: boolean = true): UserDto {
     const castedUser: UserDto = {
@@ -26,8 +33,33 @@ export class AuthService {
       castedUser.status = StatusEnum.Active;
       castedUser.roles = [ { name: NameEnum.User } ];
     }
-    console.log({castedUser});
     return castedUser;
+  }
+
+  saveToken(token: string) {
+    this.storage.setItem('token', token);
+    this.loggedIn.next(true);
+  }
+
+  logout() {
+    this.router.navigate(['/sign-in']).then(r => {
+      if (!r) return;
+
+      this.loggedIn.next(false)
+      this.storage.removeItem('token');
+    });
+  }
+
+  isTokenExpired(): boolean {
+    const token = this.getToken();
+    if (!token) return true;
+
+    const expiry = JSON.parse(atob(token.split('.')[1])).exp;
+    return Math.floor(new Date().getTime() / 1000) >= expiry;
+  }
+
+  getToken() {
+    return this.storage.getItem('token');
   }
 
   createAccount(formValue: any): Observable<object> {

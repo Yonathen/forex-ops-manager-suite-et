@@ -52,7 +52,7 @@ export class SigninComponent implements OnDestroy, OnInit {
   }
 
   redirectToDashboard() {
-    this.router.navigateByUrl('/dashboard').then(r => r && this.setSignInForm());
+    this.router.navigateByUrl('/dashboard/overview').then(r => r && this.setSignInForm());
   }
 
   onSubmit() {
@@ -61,7 +61,14 @@ export class SigninComponent implements OnDestroy, OnInit {
     if (this.signInForm.valid) {
       this.authService.accessAccount(this.signInForm.value)
         .subscribe(
-          (response) => { this.redirectToDashboard(); },
+          (response) => {
+            const blobResponse: Blob = response as Blob;
+            blobResponse.text().then((text) => {
+              const json = JSON.parse(text);
+              this.authService.saveToken(json.token);
+              this.redirectToDashboard();
+            });
+          },
           (error) => { console.error('Error:', error); }
         )
     }
