@@ -1,0 +1,61 @@
+<form [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="w-full h-full">
+  <div class="flex flex-wrap content-center justify-center w-full h-full lg:px-8 md:px-6 px-4 py-8">
+    <div class="bg-surface-0 p-6 shadow rounded w-full lg:w-2/6 h-fit">
+      <div class="text-center mb-5">
+        <div class="text-gray-800 text-3xl font-medium mb-3">Welcome Back</div>
+        <span class="text-gray-600 font-medium line-height-3">Don't have an account?</span>
+        <a routerLink="/sign-up" class="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Create today!</a>
+      </div>
+      <div class="flex flex-col gap-8 w-full py-4">
+        <div class="flex flex-col gap-2">
+          <p-floatlabel>
+            <input
+              pInputText
+              id="username"
+              autocomplete="off"
+              class="w-full"
+              formControlName="username"
+              [ngClass]="{'ng-invalid ng-dirty': getFormControl('username')?.hasError('required') && submitted }"
+            />
+            <label for="username">Username</label>
+          </p-floatlabel>
+          @if ( getFormControl('username')?.hasError('required') && submitted) {
+            <small id="username-help" class="text-red-600 px-3">Enter your username</small>
+          }
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <p-floatlabel>
+            <input
+              pInputText
+              id="password"
+              type="password"
+              autocomplete="off"
+              class="w-full"
+              formControlName="password"
+              [ngClass]="{'ng-invalid ng-dirty':  getFormControl('password')?.hasError('required') && submitted }"
+            />
+            <label for="password">Password</label>
+          </p-floatlabel>
+          @if ( getFormControl('password')?.hasError('required') && submitted) {
+            <small id="password-help" class="text-red-600 px-3">Enter your password</small>
+          }
+        </div>
+      </div>
+      <div class="flex flex-col gap-4 w-full py-4">
+        <div class="flex flex-wrap w-full justify-center">
+            <p-button class="w-full" type="submit">
+              <div class="flex flex-wrap w-full content-center">
+                <div class="flex content-center h-full pt-1">
+                  <i class="pi pi-user"></i>
+                </div>
+                <div class="flex grow content-center justify-center">
+                  Sign In
+                </div>
+              </div>
+            </p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
