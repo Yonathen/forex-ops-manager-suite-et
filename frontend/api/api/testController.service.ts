@@ -9,17 +9,24 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent, HttpParameterCodec, HttpContext
-        }       from '@angular/common/http';
-import { CustomHttpParameterCodec }                          from '../encoder';
-import { Observable }                                        from 'rxjs';
+import {
+    HttpClient,
+    HttpContext,
+    HttpEvent,
+    HttpHeaders,
+    HttpParameterCodec,
+    HttpParams,
+    HttpResponse
+} from '@angular/common/http';
+import { Inject, Injectable, Optional } from '@angular/core';
+import { Observable } from 'rxjs';
+import { CustomHttpParameterCodec } from '../encoder';
 
 
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import { environment } from '../../src/environments/environment';
+import { Configuration } from '../configuration';
+import { BASE_PATH } from '../variables';
 
 
 
@@ -28,7 +35,7 @@ import { Configuration }                                     from '../configurat
 })
 export class TestControllerService {
 
-    protected basePath = 'http://128.199.63.45:8080';
+    protected basePath = environment.apiBaseUrl;
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

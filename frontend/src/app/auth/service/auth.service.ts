@@ -1,10 +1,10 @@
-import {Inject, Injectable} from '@angular/core';
-import {AuthControllerService, RoleDto, UserDto, UserPublicDto} from '../../../../api';
+import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthControllerService, RoleDto, UserDto, UserPublicDto } from '../../../../api';
+import { APP_DATA_STORAGE } from '../../shared/provider/storage';
 import StatusEnum = UserPublicDto.StatusEnum;
-import {BehaviorSubject, Observable} from 'rxjs';
 import NameEnum = RoleDto.NameEnum;
-import {Router} from '@angular/router';
-import {APP_DATA_STORAGE} from '../../shared/provider/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -36,8 +36,9 @@ export class AuthService {
     return castedUser;
   }
 
-  saveToken(token: string) {
+  saveToken(token: string, userId: string) {
     this.storage.setItem('token', token);
+    this.storage.setItem('currentUserId', userId);
     this.loggedIn.next(true);
   }
 
@@ -47,6 +48,7 @@ export class AuthService {
 
       this.loggedIn.next(false)
       this.storage.removeItem('token');
+      this.storage.removeItem('currentUserId');
     });
   }
 
@@ -60,6 +62,10 @@ export class AuthService {
 
   getToken() {
     return this.storage.getItem('token');
+  }
+
+  getCurrentUserId() {
+    return this.storage.getItem('currentUserId');
   }
 
   createAccount(formValue: any): Observable<object> {
