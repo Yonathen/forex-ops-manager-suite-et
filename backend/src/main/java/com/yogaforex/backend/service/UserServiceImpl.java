@@ -1,16 +1,10 @@
 package com.yogaforex.backend.service;
 
-import com.yogaforex.backend.controller.BranchController;
-import com.yogaforex.backend.dto.PermissionDto;
-import com.yogaforex.backend.dto.RoleDto;
-import com.yogaforex.backend.dto.UserDto;
-import com.yogaforex.backend.dto.UserPublicDto;
-import com.yogaforex.backend.models.Branch;
-import com.yogaforex.backend.models.Permission;
-import com.yogaforex.backend.models.Role;
-import com.yogaforex.backend.models.User;
-import com.yogaforex.backend.repository.RoleRepository;
-import com.yogaforex.backend.repository.UserRepository;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.modelmapper.spi.MappingContext;
@@ -22,11 +16,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import com.yogaforex.backend.dto.PermissionDto;
+import com.yogaforex.backend.dto.RoleDto;
+import com.yogaforex.backend.dto.UserDto;
+import com.yogaforex.backend.dto.UserPublicDto;
+import com.yogaforex.backend.models.Permission;
+import com.yogaforex.backend.models.Role;
+import com.yogaforex.backend.models.User;
+import com.yogaforex.backend.repository.RoleRepository;
+import com.yogaforex.backend.repository.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -141,7 +139,7 @@ public class UserServiceImpl implements UserService {
                                     : ctx.getSource()
                                     .stream()
                                     .map(role -> new Role(
-                                            role.getRoleId(),
+                                            role.getId(),
                                             role.getName(),
                                             role.getPermissions()
                                                     .stream()
@@ -160,7 +158,7 @@ public class UserServiceImpl implements UserService {
                                     : ctx.getSource()
                                     .stream()
                                     .map(role -> new Role(
-                                            role.getRoleId(),
+                                            role.getId(),
                                             role.getName(),
                                             role.getPermissions()
                                                     .stream()

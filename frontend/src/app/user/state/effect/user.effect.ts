@@ -2,9 +2,20 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map, of } from 'rxjs';
 import { UserDto, UserPublicDto } from '../../../../../api';
-import { loadCurrentUserCompleted } from '../../../shared/state/action/global.actions';
 import { UserService } from '../../service/user.service';
-import { updateUser } from '../action/user.action';
+import {
+  addRoleToUser,
+  addRoleToUserCompleted,
+  fetchAllRoles,
+  fetchAllRolesCompleted,
+  fetchAllUsers,
+  fetchAllUsersCompleted,
+  fetchUserById,
+  fetchUserByIdCompleted,
+  removeRoleFromUser,
+  removeRoleFromUserCompleted,
+  updateUserDetail
+} from '../action/user.action';
 
 @Injectable()
 export class UserEffect {
@@ -14,13 +25,76 @@ export class UserEffect {
     private userService: UserService
   ) { }
 
-  loadCurrentUser$ = createEffect(() => {
+  updateUserDetail$ = createEffect(() => {
     return this.actions$?.pipe(
-      ofType(updateUser),
+      ofType(updateUserDetail),
       exhaustMap((action) => {
         return this.userService.updateUser(action.updatedUser as UserDto).pipe(
-          map((user) => loadCurrentUserCompleted({ currentUser: { user: user as UserPublicDto, loading: false } })),
-          catchError((error) => of(loadCurrentUserCompleted({ currentUser: { loading: false, error }})))
+          map((user) => fetchUserByIdCompleted({ userDetail: { user: user as UserPublicDto, loading: false } })),
+          catchError((error) => of(fetchUserByIdCompleted({ userDetail: { loading: false, error }})))
+        )
+      })
+    )
+  })
+
+  fetchAllUsers$ = createEffect(() => {
+    return this.actions$?.pipe(
+      ofType(fetchAllUsers),
+      exhaustMap((action) => {
+        return this.userService.fetchAllUsers(action.page, action.size).pipe(
+          map((data) => fetchAllUsersCompleted({ allUsers: { loading: false, data } })),
+          catchError((error) => of(fetchAllUsersCompleted({ allUsers: { loading: false, error }})))
+        )
+      })
+    )
+  })
+
+  fetchUserById$ = createEffect(() => {
+    return this.actions$?.pipe(
+      ofType(fetchUserById),
+      exhaustMap((action) => {
+        return this.userService.getUser(action.id).pipe(
+          map((user) => fetchUserByIdCompleted({ userDetail: { user: user as UserPublicDto, loading: false } })),
+          catchError((error) => of(fetchUserByIdCompleted({ userDetail: { loading: false, error }})))
+        )
+      })
+    )
+  })
+
+  fetchAllRoles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fetchAllRoles),
+      exhaustMap(() => {
+        return this.userService.fetchAllRoles().pipe(
+          map((data) => {
+            console.log({ data })
+            return fetchAllRolesCompleted({ allRoles: { loading: false, data } })
+          }),
+          catchError((error) => of(fetchAllRolesCompleted({ allRoles: { loading: false, error } })))
+        )
+      })
+    )
+  })
+
+  addRoleToUser$ = createEffect(() => {
+    return this.actions$?.pipe(
+      ofType(addRoleToUser),
+      exhaustMap((action) => {
+        return this.userService.addRoleToUser(action.userId, action.roleId).pipe(
+          map((user) => addRoleToUserCompleted({ userDetail: { user: user as UserPublicDto, loading: false } })),
+          catchError((error) => of(addRoleToUserCompleted({ userDetail: { loading: false, error }})))
+        )
+      })
+    )
+  })
+
+  removeRoleFromUser$ = createEffect(() => {
+    return this.actions$?.pipe(
+      ofType(removeRoleFromUser),
+      exhaustMap((action) => {
+        return this.userService.removeRoleFromUser(action.userId, action.roleId).pipe(
+          map((user) => removeRoleFromUserCompleted({ userDetail: { user: user as UserPublicDto, loading: false } })),
+          catchError((error) => of(removeRoleFromUserCompleted({ userDetail: { loading: false, error }})))
         )
       })
     )

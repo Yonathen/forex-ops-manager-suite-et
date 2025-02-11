@@ -1,6 +1,10 @@
+import { PaginatedResponseDTOUserPublicDto, RoleDto } from "../../../../api";
+import { IEntityState } from "../../shared/interface/entity-state";
+import { PaginatedResponseState } from "../../shared/interface/paginated-response-state";
 import { UserPublicState } from "../../shared/state/global.state";
 
-
 export interface UserState {
-    user?: UserPublicState | null
+    userDetail?: UserPublicState | null,
+    allUsers?: PaginatedResponseState<PaginatedResponseDTOUserPublicDto>,
+    allRoles?: IEntityState<RoleDto[]>
 }

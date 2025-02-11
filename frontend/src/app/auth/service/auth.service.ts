@@ -21,7 +21,7 @@ export class AuthService {
   castToAccount(formValue: any, create: boolean = true): UserDto {
     const castedUser: UserDto = {
       username: formValue.username,
-      password: formValue.password,
+      password: formValue.password
     };
 
     if (create) {

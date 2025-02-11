@@ -38,7 +38,7 @@
                 [itemInEditMode]="itemInEditMode"
                 [value]="user.email" />
 
-            <div class="flex w-full gap-8 p-3">
+            <div class="flex w-full gap-8 p-3 bg-slate-50">
                 <div class="flex flex-wrap w-1/4 text-lg font-medium content-start">
                     Status
                 </div>
@@ -54,27 +54,7 @@
             </div>
 
             <div class="flex w-full gap-8 p-3">
-                <div class="flex flex-wrap w-1/4 text-lg font-medium content-start">
-                    Roles
-                </div>
-                <div class="flex flex-col flex-wrap grow text-lg gap-2">
-                    <ng-container *ngFor="let role of user.roles">
-                        <p-tag class="w-fit h-[1.5rem]">
-                            {{role.name?.replace("_", " ")?.toLowerCase()}}
-                        </p-tag>
-                        <div class="text-md font-medium">Permissions</div>
-                        <ng-container *ngFor="let permission of role.permissions">
-                            <div class="flex pl-2 gap-2">
-                                <ng-container *ngFor="let permission of role.permissions">
-                                    <p-tag severity="secondary" class="w-fit h-[1.5rem]">
-                                        {{permission.module?.replace("_", " ")?.toLowerCase()}}:
-                                        {{permission.access?.replace("_", " ")?.toLowerCase()}}
-                                    </p-tag>
-                                </ng-container>
-                            </div>
-                        </ng-container>
-                    </ng-container>
-                </div>
+                <app-roles [roles]="currentUserRoles" />
             </div>
 
         </div>

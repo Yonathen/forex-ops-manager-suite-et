@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
@@ -18,7 +18,7 @@ import { EProfileItem } from '../../enum/profile-item';
   templateUrl: './profile-item.component.html',
   styleUrl: './profile-item.component.scss'
 })
-export class ProfileItemComponent implements OnInit {
+export class ProfileItemComponent implements OnInit, OnChanges {
   @Input() item?: EProfileItem;
   @Input() isHighlighted: boolean = false;
   @Input() editable: boolean = false;
@@ -30,8 +30,12 @@ export class ProfileItemComponent implements OnInit {
 
   editableValue?: string;
 
-  ngOnInit(): void {
-    this.editableValue = this.value;
+  ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value']) {
+      this.editableValue = changes['value'].currentValue;
+    }
   }
 
   get isEditMode() {
@@ -39,6 +43,7 @@ export class ProfileItemComponent implements OnInit {
   }
 
   setEditMode() {
+    this.editableValue = this.value
     this.editProfileItemEvent.emit(this.item);
   }
 

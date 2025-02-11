@@ -24,6 +24,7 @@
     "@auth0/angular-jwt": "^5.2.0",
     "@ngrx/effects": "^19.0.0",
     "@ngrx/store": "^19.0.0",
+    "@ngrx/store-devtools": "^19.0.1",
     "@primeng/themes": "^19.0.5",
     "material-icons": "^1.13.13",
     "primeicons": "^7.0.0",

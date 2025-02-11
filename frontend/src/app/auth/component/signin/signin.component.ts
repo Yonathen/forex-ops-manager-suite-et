@@ -61,13 +61,11 @@ export class SigninComponent implements OnDestroy, OnInit {
     if (this.signInForm.valid) {
       this.authService.accessAccount(this.signInForm.value)
         .subscribe(
-          (response) => {
-            const blobResponse: Blob = response as Blob;
-            blobResponse.text().then((text) => {
-              const json = JSON.parse(text);
-              this.authService.saveToken(json.token, json.id);
+          (response: any) => {
+            if ( response?.token && response?.id ) {
+              this.authService.saveToken(response?.token, response?.id);
               this.redirectToDashboard();
-            });
+            }
           },
           (error) => { console.error('Error:', error); }
         )

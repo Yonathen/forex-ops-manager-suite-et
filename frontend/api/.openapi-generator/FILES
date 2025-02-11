@@ -4,6 +4,7 @@ api.module.ts
 api/api.ts
 api/authController.service.ts
 api/branchController.service.ts
+api/roleController.service.ts
 api/testController.service.ts
 api/userController.service.ts
 configuration.ts
