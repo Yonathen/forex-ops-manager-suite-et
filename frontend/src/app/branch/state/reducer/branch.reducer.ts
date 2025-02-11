@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { fetchAllUsers, fetchAllUsersCompleted } from "../../../user/state/action/user.action";
-import { addUserToBranch, addUserToBranchCompleted, fetchAllBranches, fetchAllBranchesCompleted, fetchBranchById, fetchBranchByIdCompleted, removeUserFromBranch, removeUserFromBranchCompleted, updateBranchDetail, updateBranchDetailCompleted } from "../action/branch.action";
+import { addUserToBranch, addUserToBranchCompleted, createBranchDetail, createBranchDetailCompleted, fetchAllBranches, fetchAllBranchesCompleted, fetchBranchById, fetchBranchByIdCompleted, removeBranchDetail, removeBranchDetailCompleted, removeUserFromBranch, removeUserFromBranchCompleted, updateBranchDetail, updateBranchDetailCompleted } from "../action/branch.action";
 import { BranchState } from "../branch.state";
 
 export const initialBranchState: BranchState = {
@@ -13,6 +13,14 @@ export const branchReducer = createReducer(
     // Fetch branch by id
     on(fetchBranchById, (state) => ({ ...state, currentBranch: { loading: true } })),
     on(fetchBranchByIdCompleted, (state, { branchDetail }) => ({ ...state, branchDetail })),
+
+    // Create branch
+    on(createBranchDetail, (state) => ({ ...state, branch: { loading: true }}) ),
+    on(createBranchDetailCompleted, (state, { branchDetail }) => ({ ...state, branchDetail })),
+
+    // Remove branch
+    on(removeBranchDetail, (state) => ({ ...state, branch: { loading: true }}) ),
+    on(removeBranchDetailCompleted, (state, { branchDetail }) => ({ ...state, branchDetail })),
 
     // Update branch
     on(updateBranchDetail, (state) => ({ ...state, branch: { loading: true }}) ),

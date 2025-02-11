@@ -4,17 +4,22 @@ import { catchError, exhaustMap, map, of } from 'rxjs';
 import { BranchDto } from '../../../../../api';
 import { BranchService } from '../../service/branch.service';
 import {
-    addUserToBranch,
-    addUserToBranchCompleted,
-    fetchAllBranches,
-    fetchAllBranchesCompleted,
-    fetchAllBranchUsers,
-    fetchAllBranchUsersCompleted,
-    fetchBranchById,
-    fetchBranchByIdCompleted,
-    removeUserFromBranch,
-    removeUserFromBranchCompleted,
-    updateBranchDetail
+  addUserToBranch,
+  addUserToBranchCompleted,
+  createBranchDetail,
+  createBranchDetailCompleted,
+  fetchAllBranches,
+  fetchAllBranchesCompleted,
+  fetchAllBranchUsers,
+  fetchAllBranchUsersCompleted,
+  fetchBranchById,
+  fetchBranchByIdCompleted,
+  removeBranchDetail,
+  removeBranchDetailCompleted,
+  removeUserFromBranch,
+  removeUserFromBranchCompleted,
+  updateBranchDetail,
+  updateBranchDetailCompleted
 } from '../action/branch.action';
 
 @Injectable()
@@ -25,13 +30,38 @@ export class BranchEffect {
     private branchService: BranchService
   ) { }
 
+  createBranchDetail$ = createEffect(() => {
+    return this.actions$?.pipe(
+      ofType(createBranchDetail),
+      exhaustMap((action) => {
+        console.log({ action })
+        return this.branchService.createBranch(action.createdBranch as BranchDto).pipe(
+          map((branch) => createBranchDetailCompleted({ branchDetail: { branch: branch, loading: false } })),
+          catchError((error) => of(createBranchDetailCompleted({ branchDetail: { loading: false, error }})))
+        )
+      })
+    )
+  })
+
+  removeBranchDetail$ = createEffect(() => {
+    return this.actions$?.pipe(
+      ofType(removeBranchDetail),
+      exhaustMap((action) => {
+        return this.branchService.removeBranch(action.removedBranch as BranchDto).pipe(
+          map((branch) => removeBranchDetailCompleted({ branchDetail: { branch: branch, loading: false } })),
+          catchError((error) => of(removeBranchDetailCompleted({ branchDetail: { loading: false, error }})))
+        )
+      })
+    )
+  })
+
   updateBranchDetail$ = createEffect(() => {
     return this.actions$?.pipe(
       ofType(updateBranchDetail),
       exhaustMap((action) => {
         return this.branchService.updateBranch(action.updatedBranch as BranchDto).pipe(
-          map((branch) => fetchBranchByIdCompleted({ branchDetail: { branch: branch, loading: false } })),
-          catchError((error) => of(fetchBranchByIdCompleted({ branchDetail: { loading: false, error }})))
+          map((branch) => updateBranchDetailCompleted({ branchDetail: { branch: branch, loading: false } })),
+          catchError((error) => of(updateBranchDetailCompleted({ branchDetail: { loading: false, error }})))
         )
       })
     )

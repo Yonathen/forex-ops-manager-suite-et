@@ -2,6 +2,12 @@ export enum EBranchActions {
     FetchBranchById = '[Branch] Fetch branch by id',
     FetchAllBranches = '[Branch] Fetch all branchs',
 
+    CreateBranch = '[Branch] Create branch',
+    CreateBranchCompleted = '[Branch] Create branch completed',
+
+    RemoveBranch = '[Branch] Remove branch',
+    RemoveBranchCompleted = '[Branch] Remove branch completed',
+
     UpdateBranch = '[Branch] Update branch',
     UpdateBranchCompleted = '[Branch] Update branch completed',
 

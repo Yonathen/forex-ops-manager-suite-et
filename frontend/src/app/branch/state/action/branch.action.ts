@@ -14,6 +14,26 @@ export const fetchBranchByIdCompleted = createAction(
     props<{ branchDetail: BranchDetailState }>()
 )
 
+// Create Branches
+export const createBranchDetail = createAction(
+    EBranchActions.CreateBranch,
+    props<{ createdBranch: BranchDto }>()
+)
+export const createBranchDetailCompleted = createAction(
+    EBranchActions.CreateBranchCompleted,
+    props<{ branchDetail: BranchDetailState }>()
+)
+
+// Remove Branches
+export const removeBranchDetail = createAction(
+    EBranchActions.RemoveBranch,
+    props<{ removedBranch: BranchDto }>()
+)
+export const removeBranchDetailCompleted = createAction(
+    EBranchActions.RemoveBranchCompleted,
+    props<{ branchDetail: BranchDetailState }>()
+)
+
 // Update Branches
 export const updateBranchDetail = createAction(
     EBranchActions.UpdateBranch,

@@ -78,11 +78,6 @@ export class UserComponent implements OnInit, OnDestroy {
         command: () => this.viewUserDetail()
       },
       {
-        label: 'Edit user',
-        icon: 'edit',
-        command: () => {}
-      },
-      {
         label: 'Remove user',
         icon: 'delete',
         command: () => {}

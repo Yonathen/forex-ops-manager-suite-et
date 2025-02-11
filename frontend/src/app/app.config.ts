@@ -9,6 +9,7 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
+import { BranchEffect } from './branch/state/effect/branch.effect';
 import { branchReducer } from './branch/state/reducer/branch.reducer';
 import { MyPreset } from './my-preset';
 import { AppStorage } from './shared/model/AppStorage';
@@ -50,7 +51,8 @@ export const appConfig: ApplicationConfig = {
     }),
     provideEffects([
         CurrentUserEffect,
-        UserEffect
+        UserEffect,
+        BranchEffect
     ]),
     provideStoreDevtools({
         maxAge: 25, // Retains last 25 states

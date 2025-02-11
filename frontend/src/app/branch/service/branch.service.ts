@@ -15,6 +15,15 @@ export class BranchService {
       return this.branchControllerService.fetchBranchById(id);
     }
   
+    createBranch(createdBranch: BranchDto): Observable<BranchDto>{
+      console.log({ createdBranch })
+      return this.branchControllerService.createBranch(createdBranch);
+    }
+  
+    removeBranch(removedBranch: BranchDto): Observable<BranchDto>{
+      return this.branchControllerService.deleteBranch(removedBranch);
+    }
+  
     updateBranch(updatedBranch: BranchDto): Observable<BranchDto>{
       return this.branchControllerService.updateBranch(updatedBranch);
     }
