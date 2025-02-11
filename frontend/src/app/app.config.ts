@@ -9,6 +9,7 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
+import { branchReducer } from './branch/state/reducer/branch.reducer';
 import { MyPreset } from './my-preset';
 import { AppStorage } from './shared/model/AppStorage';
 import { APP_DATA_STORAGE } from './shared/provider/storage';
@@ -43,6 +44,7 @@ export const appConfig: ApplicationConfig = {
         }
     }),
     provideStore({
+        branch: branchReducer,
         global: globalReducer,
         user: useReducer
     }),

@@ -9,9 +9,9 @@ export enum EUserActions {
     FetchAllRoles = '[Role] Fetch all roles',
     FetchAllRolesCompleted = '[Role] Fetch all roles completed',
 
-    AddRoleToUser = '[Role] Add role to a user',
-    AddRoleToUserCompleted = '[Role] Add role to a user completed',
+    AddRoleToUser = '[Role => User] Add role to a user',
+    AddRoleToUserCompleted = '[Role => User] Add role to a user completed',
 
-    RemoveRoleFromUser = '[Role] Remove role from a user',
-    RemoveRoleFromUserCompleted = '[Role] Remove role from a user completed',
+    RemoveRoleFromUser = '[Role <= User] Remove role from a user',
+    RemoveRoleFromUserCompleted = '[Role <= User] Remove role from a user completed',
 }

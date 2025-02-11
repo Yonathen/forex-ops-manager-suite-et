@@ -105,15 +105,15 @@ export class BranchControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addRoleToUser1(userId: string, branchId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<BranchDto>;
-    public addRoleToUser1(userId: string, branchId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<BranchDto>>;
-    public addRoleToUser1(userId: string, branchId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<BranchDto>>;
-    public addRoleToUser1(userId: string, branchId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public addUserToBranch(userId: string, branchId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<BranchDto>;
+    public addUserToBranch(userId: string, branchId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<BranchDto>>;
+    public addUserToBranch(userId: string, branchId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<BranchDto>>;
+    public addUserToBranch(userId: string, branchId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling addRoleToUser1.');
+            throw new Error('Required parameter userId was null or undefined when calling addUserToBranch.');
         }
         if (branchId === null || branchId === undefined) {
-            throw new Error('Required parameter branchId was null or undefined when calling addRoleToUser1.');
+            throw new Error('Required parameter branchId was null or undefined when calling addUserToBranch.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -545,15 +545,15 @@ export class BranchControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public removeRoleFromUser1(userId: string, branchId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<BranchDto>;
-    public removeRoleFromUser1(userId: string, branchId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<BranchDto>>;
-    public removeRoleFromUser1(userId: string, branchId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<BranchDto>>;
-    public removeRoleFromUser1(userId: string, branchId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public removeUserFromBranch(userId: string, branchId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<BranchDto>;
+    public removeUserFromBranch(userId: string, branchId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<BranchDto>>;
+    public removeUserFromBranch(userId: string, branchId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<BranchDto>>;
+    public removeUserFromBranch(userId: string, branchId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling removeRoleFromUser1.');
+            throw new Error('Required parameter userId was null or undefined when calling removeUserFromBranch.');
         }
         if (branchId === null || branchId === undefined) {
-            throw new Error('Required parameter branchId was null or undefined when calling removeRoleFromUser1.');
+            throw new Error('Required parameter branchId was null or undefined when calling removeUserFromBranch.');
         }
 
         let localVarHeaders = this.defaultHeaders;
