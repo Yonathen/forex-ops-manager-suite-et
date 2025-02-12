@@ -1,0 +1,30 @@
+<div class="flex flex-col h-full w-full">
+    <div class="flex w-full h-[3rem] border-solid border-b border-gray-300 text-xl font-medium">
+        Branch detail
+    </div>
+    <div class="flex flex-wrap justify-center w-full grow py-6">
+        <div class="flex flex-col flex-wrap w-full lg:w-[45rem]">
+            <app-branch-item
+                (editBranchItemEvent)="setItemInEditMode($event)"
+                (saveBranchItemEvent)="updateBranchItem($event)"
+                [isHighlighted]="true"
+                [editable]="true"
+                [item]="items.name"
+                [itemInEditMode]="itemInEditMode"
+                [value]="branchDetail?.name" />
+
+            <app-branch-item
+                (editBranchItemEvent)="setItemInEditMode($event)"
+                (saveBranchItemEvent)="updateBranchItem($event)"
+                [item]="items.branchCode"
+                [editable]="true"
+                [itemInEditMode]="itemInEditMode"
+                [value]="branchDetail?.branchCode" />
+
+            <div class="flex w-full gap-8 p-3">
+                <app-users [users]="branchDetailUsers" [branchDetail]="branchDetail" />
+            </div>
+
+        </div>
+    </div>
+</div>

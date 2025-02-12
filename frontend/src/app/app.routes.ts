@@ -3,6 +3,7 @@ import { SigninComponent } from './auth/component/signin/signin.component';
 import { SignupComponent } from './auth/component/signup/signup.component';
 import { AuthGuard } from './auth/service/auth-gard.service';
 import { BranchComponent } from './branch/branch.component';
+import { BranchDetailComponent } from './branch/component/branch-detail/branch-detail.component';
 import { OverviewComponent } from './dashboard/component/overview/overview.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportComponent } from './report/report.component';
@@ -25,6 +26,7 @@ export const routes: Routes = [
       { path: 'users', component: UserComponent },
       { path: 'users/:id', component: UserDetailComponent },
       { path: 'branches', component: BranchComponent },
+      { path: 'branches/:id', component: BranchDetailComponent },
       { path: 'reports', component: ReportComponent },
       { path: 'profile', component: ProfileComponent }
     ],
