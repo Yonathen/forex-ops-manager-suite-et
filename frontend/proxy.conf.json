@@ -1,6 +1,6 @@
 {
     "/development-api": {
-      "target": "http://128.199.63.45:8080",
+      "target": "http://backend:8080",
       "changeOrigin": true,
       "logLevel": "debug",
       "pathRewrite": {
@@ -8,7 +8,7 @@
       }
     },
     "/localdocker-api": {
-      "target": "http://localhost:8080",
+      "target": "http://backend:8080",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug",
