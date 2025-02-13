@@ -11,7 +11,7 @@
 
 export interface Address { 
     id?: string;
-    email: string;
+    email?: string;
     phone?: string;
     street?: string;
     woreda?: string;

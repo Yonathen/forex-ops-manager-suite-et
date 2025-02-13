@@ -1,19 +1,26 @@
 package com.yogaforex.backend.controller;
 
-import com.yogaforex.backend.dto.BranchDto;
-import com.yogaforex.backend.dto.UserPublicDto;
-import com.yogaforex.backend.models.Branch;
-import com.yogaforex.backend.models.User;
-import com.yogaforex.backend.service.BranchService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.yogaforex.backend.dto.BranchDto;
+import com.yogaforex.backend.dto.UserPublicDto;
+import com.yogaforex.backend.models.Branch;
+import com.yogaforex.backend.service.BranchService;
 
 @RestController
 @RequestMapping("/api/branches")
@@ -49,14 +56,14 @@ public class BranchController {
     }
 
     @PutMapping("/add-user/{userId}/{branchId}")
-    public ResponseEntity<BranchDto> addRoleToUser(@PathVariable UUID userId, @PathVariable UUID branchId) {
+    public ResponseEntity<BranchDto> addUserToBranch(@PathVariable UUID userId, @PathVariable UUID branchId) {
         logger.info("Add user with user id of {} to branch with branch id of {}", userId, branchId);
         Branch updatedBranch = branchService.addUserToBranch(userId, branchId);
         return ResponseEntity.ok(branchService.convertBranchToBranchDto(updatedBranch));
     }
 
     @PutMapping("/remove-user/{userId}/{branchId}")
-    public ResponseEntity<BranchDto> removeRoleFromUser(@PathVariable UUID userId, @PathVariable UUID branchId) {
+    public ResponseEntity<BranchDto> removeUserFromBranch(@PathVariable UUID userId, @PathVariable UUID branchId) {
         logger.info("Remove role with role id of {} from user with user id of {}", userId, branchId);
         Branch updatedBranch = branchService.removeUserFromBranch(userId, branchId);
         return ResponseEntity.ok(branchService.convertBranchToBranchDto(updatedBranch));

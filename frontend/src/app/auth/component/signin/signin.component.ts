@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { Button } from 'primeng/button';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { InputText } from 'primeng/inputtext';
-import {Button} from 'primeng/button';
-import {Router, RouterLink} from '@angular/router';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthService} from '../../service/auth.service';
-import {NgClass} from '@angular/common';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   standalone: true,
@@ -61,13 +61,11 @@ export class SigninComponent implements OnDestroy, OnInit {
     if (this.signInForm.valid) {
       this.authService.accessAccount(this.signInForm.value)
         .subscribe(
-          (response) => {
-            const blobResponse: Blob = response as Blob;
-            blobResponse.text().then((text) => {
-              const json = JSON.parse(text);
-              this.authService.saveToken(json.token);
+          (response: any) => {
+            if ( response?.token && response?.id ) {
+              this.authService.saveToken(response?.token, response?.id);
               this.redirectToDashboard();
-            });
+            }
           },
           (error) => { console.error('Error:', error); }
         )

@@ -11,7 +11,7 @@ import { PermissionDto } from './permissionDto';
 
 
 export interface RoleDto { 
-    roleId?: string;
+    id?: string;
     name?: RoleDto.NameEnum;
     permissions?: Set<PermissionDto>;
 }

@@ -1,0 +1,41 @@
+<div class="flex w-full gap-8 p-3 bg-slate-50" [ngClass]="{ 'bg-slate-50': isHighlighted }">
+    <div class="flex flex-wrap w-1/4 text-lg font-medium content-start">
+        Status
+    </div>
+    <ng-container *ngIf="!isEditMode; else editTemplate">
+        <div class="flex flex-col flex-wrap grow text-lg gap-2">
+            <p-tag *ngIf="!isActive(value)" class="w-fit h-[1.5rem]" severity="danger" >
+                {{value?.replace("_", " ")}}
+            </p-tag>
+    
+            <p-tag *ngIf="isActive(value)" severity="success" class="w-fit h-[1.5rem]">
+                {{value?.replace("_", " ")}}
+            </p-tag>
+        </div>
+        <div *ngIf="editable" class="flex w-fit content-center">
+            <i (click)="setEditMode()" class="material-icons-outlined cursor-pointer text-slate-500 hover:text-primary-600">edit</i>
+        </div>
+    </ng-container>
+
+    <ng-template #editTemplate>
+        <div class="flex flex-wrap grow text-lg gap-3">
+            <p-select
+                [options]="availableStatuses"
+                [(ngModel)]="editableValue"
+                optionLabel="status"
+                optionValue="status"
+                placeholder="Select a status"
+            />
+
+            <p-button
+                class="w-[3rem]"
+                icon="pi pi-times"
+                (click)="onCancel()"
+                severity="danger"
+                [outlined]="true"
+            />
+
+            <p-button class="w-[3rem]" icon="pi pi-check" (click)="onSave()"  />
+        </div>
+    </ng-template>
+</div>

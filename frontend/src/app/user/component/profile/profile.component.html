@@ -1,0 +1,68 @@
+<div class="flex flex-col h-full w-full">
+    <div class="flex w-full h-[3rem] border-solid border-b border-gray-300 text-xl font-medium">
+        Profile
+    </div>
+
+    <div *ngIf="user$ | async as user" class="flex flex-wrap justify-center w-full grow py-6">
+        <div class="flex flex-col flex-wrap w-full md:w-1/2 pr-5">
+            <div class="flex flex-col w-full">
+                <div class="text-lg font-medium content-start pb-2">Detail</div>
+                <app-profile-item
+                    (editProfileItemEvent)="setItemInEditMode($event)"
+                    (saveProfileItemEvent)="updateProfileItem($event)"
+                    [isHighlighted]="true"
+                    [editable]="true"
+                    [item]="items.firstName"
+                    [itemInEditMode]="itemInEditMode"
+                    [value]="user.firstName" />
+
+                <app-profile-item
+                    (editProfileItemEvent)="setItemInEditMode($event)"
+                    (saveProfileItemEvent)="updateProfileItem($event)"
+                    [item]="items.lastName"
+                    [editable]="true"
+                    [itemInEditMode]="itemInEditMode"
+                    [value]="user.lastName" />
+
+                <app-profile-item
+                    (editProfileItemEvent)="setItemInEditMode($event)"
+                    (saveProfileItemEvent)="updateProfileItem($event)"
+                    [isHighlighted]="true"
+                    [editable]="true"
+                    [item]="items.username"
+                    [itemInEditMode]="itemInEditMode"
+                    [value]="user.username" />
+
+                <app-profile-item
+                    (editProfileItemEvent)="setItemInEditMode($event)"
+                    (saveProfileItemEvent)="updateProfileItem($event)"
+                    [item]="items.email"
+                    [editable]="true"
+                    [itemInEditMode]="itemInEditMode"
+                    [value]="user.email" />
+
+                <div class="flex w-full gap-8 p-3 bg-slate-50">
+                    <div class="flex flex-wrap w-1/4 text-lg font-medium content-start">
+                        Status
+                    </div>
+                    <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                        <p-tag *ngIf="!isActive(user?.status)" class="w-fit h-[1.5rem]" severity="danger" >
+                            {{user.status?.replace("_", " ")}}
+                        </p-tag>
+
+                        <p-tag *ngIf="isActive(user?.status)" severity="success" class="w-fit h-[1.5rem]">
+                            {{user.status?.replace("_", " ")}}
+                        </p-tag>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col flex-wrap w-full md:w-1/2 pl-5">
+            <div class="flex flex-col w-full">
+                <div class="text-lg font-medium content-start pb-2">Roles</div>
+                <app-roles [roles]="currentUserRoles" [editable]="false" />
+            </div>
+        </div>
+    </div>
+</div>

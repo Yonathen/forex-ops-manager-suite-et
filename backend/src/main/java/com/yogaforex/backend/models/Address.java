@@ -1,18 +1,22 @@
 package com.yogaforex.backend.models;
 
-import jakarta.persistence.*;
+import java.util.UUID;
+
+import org.hibernate.annotations.UuidGenerator;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UuidGenerator;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import java.util.UUID;
 
 @Entity
 @Table(
@@ -30,7 +34,6 @@ public class Address {
     @Column(updatable = false, nullable = false)
     private UUID id;
 
-    @NotBlank
     @Size(max = 50)
     @Email
     private String email;
