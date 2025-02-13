@@ -1,7 +1,13 @@
 
 export enum EUserActions {
     FetchUserById = '[User] Fetch user by id',
+    FetchUserByIdCompleted = '[User] Fetch user by id completed',
+
+    FetchUserByUsername = '[User] Fetch user by email',
+    FetchUserByUsernameCompleted = '[User] Fetch user by email completed',
+
     FetchAllUsers = '[User] Fetch all users',
+    FetchAllUsersCompleted = '[User] Fetch all users completed',
 
     UpdateUser = '[User] Update user',
     UpdateUserCompleted = '[User] Update user completed',

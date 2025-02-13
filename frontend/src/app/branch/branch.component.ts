@@ -11,9 +11,9 @@ import { TableModule } from 'primeng/table';
 import { Subscription } from 'rxjs';
 import { BranchDto, UserPublicDto } from '../../../api';
 import { CreateBranchComponent } from './component/create-branch/create-branch.component';
-import { fetchAllBranches } from './state/action/branch.action';
+import { fetchAllBranches, removeBranchDetail } from './state/action/branch.action';
 import { BranchState } from './state/branch.state';
-import { selectAllBranches } from './state/selector/branch.selector';
+import { selectAllBranches, selectBranchDetail } from './state/selector/branch.selector';
 
 @Component({
   selector: 'app-branch',
@@ -39,8 +39,9 @@ export class BranchComponent {
   branches: Array<BranchDto> = [];
   users: Array<UserPublicDto> = [];
 
-  loading: boolean = false;
+  removed: boolean = false;
   private branchSubscription!: Subscription;
+  private removeBranchSubscription!: Subscription;
 
   rowMenuItems: MenuItem[] = [];
   isCreateBranchDialogVisible: boolean = false;
@@ -59,10 +60,20 @@ export class BranchComponent {
       .subscribe((branches: Array<BranchDto> | null) => {
         this.branches = branches || [];
       });
+
+    this.removeBranchSubscription = this.store
+      .select(selectBranchDetail)
+      .subscribe((branch: BranchDto | null) => {
+        if (this.removed && branch) {
+          this.loadBranches();
+          this.removed = false;
+        }
+      });
   }
 
   ngOnDestroy(): void {
     this.branchSubscription && this.branchSubscription.unsubscribe();
+    this.removeBranchSubscription && this.branchSubscription.unsubscribe();
   }
 
   setMenuItems() {
@@ -73,9 +84,9 @@ export class BranchComponent {
         command: () => this.viewBranchDetail()
       },
       {
-        label: 'Remove user',
+        label: 'Remove branch',
         icon: 'delete',
-        command: () => {}
+        command: () => this.removeBranch()
       }
     ];
   }
@@ -101,5 +112,12 @@ export class BranchComponent {
     if (this.selectedBranch) {
       this.router.navigate([ '/dashboard/branches', this.selectedBranch.id ])
     }
+  }
+
+  removeBranch() {
+    if (!this.selectedBranch) return
+
+    this.removed = true;
+    this.store.dispatch(removeBranchDetail({ removedBranch: this.selectedBranch }))
   }
 }

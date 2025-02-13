@@ -11,7 +11,17 @@ export const fetchUserById = createAction(
     props<{ id: string }>()
 )
 export const fetchUserByIdCompleted = createAction(
-    EUserActions.FetchUserById,
+    EUserActions.FetchUserByIdCompleted,
+    props<{ userDetail: UserPublicState }>()
+)
+
+// Fetch user by username
+export const fetchUserByUsername = createAction(
+    EUserActions.FetchUserByUsername,
+    props<{ username: string }>()
+)
+export const fetchUserByUsernameCompleted = createAction(
+    EUserActions.FetchUserByUsernameCompleted,
     props<{ userDetail: UserPublicState }>()
 )
 
@@ -31,7 +41,7 @@ export const fetchAllUsers = createAction(
     props<{ page: number, size: number }>()
 )
 export const fetchAllUsersCompleted = createAction(
-    EUserActions.FetchAllUsers,
+    EUserActions.FetchAllUsersCompleted,
     props<{ allUsers: PaginatedResponseState<PaginatedResponseDTOUserPublicDto> }>()
 )
 

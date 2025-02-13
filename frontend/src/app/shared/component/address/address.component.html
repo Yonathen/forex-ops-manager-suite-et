@@ -1,0 +1,61 @@
+<div class="flex flex-wrap flex-col w-full">
+    <app-address-item
+        (editAddressItemEvent)="setItemInEditMode($event)"
+        (saveAddressItemEvent)="updateAddressItem($event)"
+        [isHighlighted]="true"
+        [editable]="true"
+        [item]="items.phone"
+        [itemInEditMode]="itemInEditMode"
+        [value]="address?.phone" />
+
+    <app-address-item
+        (editAddressItemEvent)="setItemInEditMode($event)"
+        (saveAddressItemEvent)="updateAddressItem($event)"
+        [editable]="true"
+        [item]="items.email"
+        [itemInEditMode]="itemInEditMode"
+        [value]="address?.email" />
+
+    <app-address-item
+        (editAddressItemEvent)="setItemInEditMode($event)"
+        (saveAddressItemEvent)="updateAddressItem($event)"
+        [isHighlighted]="true"
+        [editable]="true"
+        [item]="items.street"
+        [itemInEditMode]="itemInEditMode"
+        [value]="address?.street" />
+
+    <app-address-item
+        (editAddressItemEvent)="setItemInEditMode($event)"
+        (saveAddressItemEvent)="updateAddressItem($event)"
+        [editable]="true"
+        [item]="items.woreda"
+        [itemInEditMode]="itemInEditMode"
+        [value]="address?.woreda" />
+
+    <app-address-item
+        (editAddressItemEvent)="setItemInEditMode($event)"
+        (saveAddressItemEvent)="updateAddressItem($event)"
+        [isHighlighted]="true"
+        [editable]="true"
+        [item]="items.postalCode"
+        [itemInEditMode]="itemInEditMode"
+        [value]="address?.postalCode" />
+
+    <app-address-item
+        (editAddressItemEvent)="setItemInEditMode($event)"
+        (saveAddressItemEvent)="updateAddressItem($event)"
+        [editable]="true"
+        [item]="items.kebele"
+        [itemInEditMode]="itemInEditMode"
+        [value]="address?.kebele" />
+
+    <app-address-item
+        (editAddressItemEvent)="setItemInEditMode($event)"
+        (saveAddressItemEvent)="updateAddressItem($event)"
+        [isHighlighted]="true"
+        [editable]="true"
+        [item]="items.subCity"
+        [itemInEditMode]="itemInEditMode"
+        [value]="address?.subCity" />
+</div>

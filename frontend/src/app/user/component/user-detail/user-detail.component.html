@@ -1,56 +1,62 @@
 <div class="flex flex-col h-full w-full">
     <div class="flex w-full h-[3rem] border-solid border-b border-gray-300 text-xl font-medium">
-        User detail
+        User
     </div>
+
     <div class="flex flex-wrap justify-center w-full grow py-6">
-        <div class="flex flex-col flex-wrap w-full lg:w-[45rem]">
-            <app-profile-item
-                (editProfileItemEvent)="setItemInEditMode($event)"
-                (saveProfileItemEvent)="updateProfileItem($event)"
-                [isHighlighted]="true"
-                [editable]="true"
-                [item]="items.firstName"
-                [itemInEditMode]="itemInEditMode"
-                [value]="userDetail?.firstName" />
+        <div class="flex flex-col flex-wrap w-full md:w-1/2 pr-5">
+            <div class="flex flex-col w-full">
+                <div class="text-lg font-medium content-start pb-2">Detail</div>
+                <app-profile-item
+                    (editProfileItemEvent)="setItemInEditMode($event)"
+                    (saveProfileItemEvent)="updateProfileItem($event)"
+                    [isHighlighted]="true"
+                    [editable]="true"
+                    [item]="items.firstName"
+                    [itemInEditMode]="itemInEditMode"
+                    [value]="userDetail?.firstName" />
 
-            <app-profile-item
-                (editProfileItemEvent)="setItemInEditMode($event)"
-                (saveProfileItemEvent)="updateProfileItem($event)"
-                [item]="items.lastName"
-                [editable]="true"
-                [itemInEditMode]="itemInEditMode"
-                [value]="userDetail?.lastName" />
+                <app-profile-item
+                    (editProfileItemEvent)="setItemInEditMode($event)"
+                    (saveProfileItemEvent)="updateProfileItem($event)"
+                    [item]="items.lastName"
+                    [editable]="true"
+                    [itemInEditMode]="itemInEditMode"
+                    [value]="userDetail?.lastName" />
 
-            <app-profile-item
-                (editProfileItemEvent)="setItemInEditMode($event)"
-                (saveProfileItemEvent)="updateProfileItem($event)"
-                [isHighlighted]="true"
-                [editable]="true"
-                [item]="items.username"
-                [itemInEditMode]="itemInEditMode"
-                [value]="userDetail?.username" />
+                <app-profile-item
+                    (editProfileItemEvent)="setItemInEditMode($event)"
+                    (saveProfileItemEvent)="updateProfileItem($event)"
+                    [isHighlighted]="true"
+                    [editable]="true"
+                    [item]="items.username"
+                    [itemInEditMode]="itemInEditMode"
+                    [value]="userDetail?.username" />
 
-            <app-profile-item
-                (editProfileItemEvent)="setItemInEditMode($event)"
-                (saveProfileItemEvent)="updateProfileItem($event)"
-                [item]="items.email"
-                [editable]="true"
-                [itemInEditMode]="itemInEditMode"
-                [value]="userDetail?.email"
-            />
+                <app-profile-item
+                    (editProfileItemEvent)="setItemInEditMode($event)"
+                    (saveProfileItemEvent)="updateProfileItem($event)"
+                    [item]="items.email"
+                    [editable]="true"
+                    [itemInEditMode]="itemInEditMode"
+                    [value]="userDetail?.email"
+                />
 
-            <app-user-status
-                (editProfileItemEvent)="setItemInEditMode($event)"
-                (saveProfileItemEvent)="updateProfileItem($event)"
-                [editable]="true"
-                [itemInEditMode]="itemInEditMode"
-                [value]="userDetail?.status"
-            />
+                <app-user-status
+                    (editProfileItemEvent)="setItemInEditMode($event)"
+                    (saveProfileItemEvent)="updateProfileItem($event)"
+                    [editable]="true"
+                    [itemInEditMode]="itemInEditMode"
+                    [value]="userDetail?.status"
+                />
+            </div>
+        </div>
 
-            <div class="flex w-full gap-8 p-3">
+        <div class="flex flex-col flex-wrap w-full md:w-1/2 pl-5">
+            <div class="flex flex-col w-full">
+                <div class="text-lg font-medium content-start pb-2">Roles</div>
                 <app-roles [roles]="userDetailRoles" [userDetail]="userDetail" />
             </div>
-
         </div>
     </div>
 </div>

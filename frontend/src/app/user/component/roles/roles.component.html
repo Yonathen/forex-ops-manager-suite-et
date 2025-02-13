@@ -1,12 +1,13 @@
-<div class="flex flex-col flex-wrap w-full lg:w-[45rem]">
-    <div class="flex flex-wrap items-center w-full py-3">
-        <div class="text-lg font-medium content-start">Roles</div>
-        <div class="flex justify-end grow gap-4">
-            <p-button severity="secondary" [outlined]="true" (click)="setCreateUserDialogVisibility(true)">
-                <i class="material-icons-outlined">add</i>
-            </p-button>
+<div class="flex flex-col flex-wrap w-full">
+    @if (editable) {
+        <div class="flex flex-wrap items-center w-full">
+            <div class="flex justify-start grow gap-4">
+                <p-button severity="secondary" [outlined]="true" (click)="setCreateUserDialogVisibility(true)">
+                    <i class="material-icons-outlined">add</i>
+                </p-button>
+            </div>
         </div>
-    </div>
+    }
     <div class="flex grow w-full">
         <p-table [value]="roles" stripedRows class="w-full">
             <ng-template #header>
@@ -21,15 +22,17 @@
                         {{role.name?.replace("_", " ")}}
                     </td>
                     <td class="bg-slate-200">
-                        <div class="flex justify-end">
-                            <p-button
-                                class="flex w-[2rem] h-[2rem]"
-                                icon="pi pi-times"
-                                severity="danger"
-                                [text]="true"
-                                (click)="removeRoleFromUser(role)"
-                            />
-                        </div>
+                        @if (editable) {
+                            <div class="flex justify-end">
+                                <p-button
+                                    class="flex w-[2rem] h-[2rem]"
+                                    icon="pi pi-times"
+                                    severity="danger"
+                                    [text]="true"
+                                    (click)="removeRoleFromUser(role)"
+                                />
+                            </div>
+                        }
                     </td>
                 </tr>
                 @for (permission of role.permissions; track permission.id) {

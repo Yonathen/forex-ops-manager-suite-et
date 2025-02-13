@@ -1,10 +1,11 @@
 package com.yogaforex.backend.service;
 
-import com.yogaforex.backend.dto.*;
-import com.yogaforex.backend.dto.BranchDto;
-import com.yogaforex.backend.models.*;
-import com.yogaforex.backend.models.Branch;
-import com.yogaforex.backend.repository.BranchRepository;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.modelmapper.spi.MappingContext;
@@ -13,11 +14,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import com.yogaforex.backend.dto.BranchDto;
+import com.yogaforex.backend.dto.UserPublicDto;
+import com.yogaforex.backend.models.Address;
+import com.yogaforex.backend.models.Branch;
+import com.yogaforex.backend.models.User;
+import com.yogaforex.backend.repository.BranchRepository;
 
 @Service
 public class BranchServiceImpl implements BranchService {
@@ -56,10 +58,33 @@ public class BranchServiceImpl implements BranchService {
         return branchRepository.findById(id).map(existingBranch -> {
             existingBranch.setName(branch.getName());
             existingBranch.setBranchCode(branch.getBranchCode());
-            existingBranch.setAddress(branch.getAddress());
+            
+            Address updatedAddress = branch.getAddress();
+            logger.info("Updated Address : email = {}", updatedAddress.getEmail());
+            if (updatedAddress != null) {
+                Address address = getUpdatedAddress(existingBranch.getAddress(), updatedAddress);
+                existingBranch.setAddress(address);
+            }
 
             return branchRepository.save(existingBranch);
         }).orElseThrow(() -> new RuntimeException("Branch not found"));
+    }
+
+    public Address getUpdatedAddress(Address address, Address updatedAddress) {
+        logger.info("Branch Address : email = {}", updatedAddress.getEmail());
+
+        if (address == null) address = new Address();
+    
+        address.setEmail(updatedAddress.getEmail());
+        address.setPhone(updatedAddress.getPhone());
+        address.setKebele(updatedAddress.getKebele());
+        address.setStreet(updatedAddress.getStreet());
+        address.setKebele(updatedAddress.getKebele());
+        address.setWoreda(updatedAddress.getWoreda());
+        address.setSubCity(updatedAddress.getSubCity());
+        address.setPostalCode(updatedAddress.getPostalCode());
+
+        return address;
     }
 
     @Override

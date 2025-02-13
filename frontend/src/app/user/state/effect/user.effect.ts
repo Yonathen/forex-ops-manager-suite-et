@@ -12,6 +12,8 @@ import {
   fetchAllUsersCompleted,
   fetchUserById,
   fetchUserByIdCompleted,
+  fetchUserByUsername,
+  fetchUserByUsernameCompleted,
   removeRoleFromUser,
   removeRoleFromUserCompleted,
   updateUserDetail
@@ -56,6 +58,18 @@ export class UserEffect {
         return this.userService.getUser(action.id).pipe(
           map((user) => fetchUserByIdCompleted({ userDetail: { user: user as UserPublicDto, loading: false } })),
           catchError((error) => of(fetchUserByIdCompleted({ userDetail: { loading: false, error }})))
+        )
+      })
+    )
+  })
+
+  fetchUserByUsername$ = createEffect(() => {
+    return this.actions$?.pipe(
+      ofType(fetchUserByUsername),
+      exhaustMap((action) => {
+        return this.userService.getUserByUsername(action.username).pipe(
+          map((user) => fetchUserByUsernameCompleted({ userDetail: { user: user as UserPublicDto, loading: false } })),
+          catchError((error) => of(fetchUserByUsernameCompleted({ userDetail: { loading: false, error }})))
         )
       })
     )

@@ -11,6 +11,7 @@ import { fetchBranchById, updateBranchDetail } from '../../state/action/branch.a
 import { BranchState } from '../../state/branch.state';
 import { selectBranchDetail, selectBranchDetailLoading } from '../../state/selector/branch.selector';
 
+import { AddressComponent } from '../../../shared/component/address/address.component';
 import { BranchItemComponent } from '../branch-item/branch-item.component';
 import { UsersComponent } from '../users/users.component';
 
@@ -22,7 +23,8 @@ import { UsersComponent } from '../users/users.component';
     TagModule,
     DropdownModule,
     BranchItemComponent,
-    UsersComponent
+    UsersComponent,
+    AddressComponent
   ],
   templateUrl: './branch-detail.component.html',
   styleUrl: './branch-detail.component.scss'
@@ -75,5 +77,11 @@ export class BranchDetailComponent implements OnInit, OnDestroy {
 
       this.itemInEditMode = null;
     }
+  }
+
+  updateAddressItem({ key, value }: { key: string, value?: string }) {
+    const currentAddress = this.branchDetail?.address;
+    const updatedBranch = { ...this.branchDetail, address: { ...currentAddress, [key]: value } };
+    this.store.dispatch(updateBranchDetail({ updatedBranch }))
   }
 }

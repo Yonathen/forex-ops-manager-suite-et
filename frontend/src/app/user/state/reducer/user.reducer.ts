@@ -8,6 +8,8 @@ import {
     fetchAllUsersCompleted,
     fetchUserById,
     fetchUserByIdCompleted,
+    fetchUserByUsername,
+    fetchUserByUsernameCompleted,
     removeRoleFromUser,
     removeRoleFromUserCompleted,
     updateUserDetail,
@@ -24,6 +26,10 @@ export const useReducer = createReducer(
     // Fetch user by id
     on(fetchUserById, (state) => ({ ...state, currentUser: { loading: true } })),
     on(fetchUserByIdCompleted, (state, { userDetail }) => ({ ...state, userDetail })),
+
+    // Fetch user by username
+    on(fetchUserByUsername, (state) => ({ ...state, currentUser: { loading: true } })),
+    on(fetchUserByUsernameCompleted, (state, { userDetail }) => ({ ...state, userDetail })),
 
     // Update user
     on(updateUserDetail, (state) => ({ ...state, user: { loading: true }}) ),

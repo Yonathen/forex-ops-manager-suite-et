@@ -17,6 +17,10 @@ export class UserService {
     return this.userControllerService.fetchUserById(id);
   }
 
+  getUserByUsername(email: string): Observable<UserPublicDto>{
+    return this.userControllerService.fetchAllUsersByUsername(email);
+  }
+
   updateUser(updatedUser: UserDto): Observable<UserPublicDto>{
     return this.userControllerService.updateUser(updatedUser);
   }

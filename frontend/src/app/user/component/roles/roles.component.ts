@@ -27,6 +27,7 @@ export class RolesComponent {
 
   @Input() userDetail!: UserPublicDto | null;
   @Input() roles: RoleDto[] = [];
+  @Input() editable: boolean = true;
   isAddRoleDialogVisible: boolean = false;
 
   constructor(
