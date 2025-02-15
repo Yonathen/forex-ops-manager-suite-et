@@ -1,5 +1,6 @@
 package com.yogaforex.backend.models;
 
+import com.yogaforex.backend.enums.EPaymentMethodType;
 import com.yogaforex.backend.enums.ETransactionType;
 import com.yogaforex.backend.enums.ETransactionStatus;
 import jakarta.persistence.*;
@@ -8,14 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UuidGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table( name = "transactions" )
@@ -39,7 +38,7 @@ public class Transaction {
     private ETransactionType transactionType;
 
     @Column( name = "transaction_status")
-    private ETransactionStatus ETransactionStatus;
+    private ETransactionStatus transactionStatus;
 
     private Double totalAmount;
 
@@ -58,7 +57,17 @@ public class Transaction {
     @JoinColumn( name = "customer_id")
     private Customer customer;
 
+    @Column( name = "payment_method_type" )
+    private EPaymentMethodType paymentMethodType;
+
+    @ManyToOne
+    @JoinColumn( name = "bank_account_id")
+    private BankAccount bankAccount;
+
     @OneToMany( mappedBy = "transaction", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TransactionItem> transactionItems = new HashSet<>();
 
+    @OneToOne
+    @JoinColumn( name = "travel_document_id" )
+    private TravelDocument travelDocument;
 }

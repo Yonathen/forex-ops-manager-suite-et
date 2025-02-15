@@ -1,6 +1,6 @@
 package com.yogaforex.backend.enums;
 
-public enum EPaymentMethod {
+public enum EPaymentMethodType {
     CASH,
     BANK_TRANSFER,
     CARD

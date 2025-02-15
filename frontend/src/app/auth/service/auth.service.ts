@@ -31,7 +31,7 @@ export class AuthService {
       castedUser.lastName = formValue.lastName;
       castedUser.email = formValue.email;
       castedUser.status = StatusEnum.Active;
-      castedUser.roles = new Set([ { name: NameEnum.User } ]);
+      castedUser.roles = [ { name: NameEnum.User } ];
     }
     return castedUser;
   }

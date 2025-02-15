@@ -7,22 +7,28 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { RoleDto } from './roleDto';
+import { Role } from './role';
+import { Address } from './address';
+import { Customer } from './customer';
+import { Branch } from './branch';
 
 
-export interface UserDto { 
+export interface User { 
     id?: string;
     username?: string;
-    password?: string;
+    email: string;
+    password: string;
     firstName?: string;
     lastName?: string;
-    email?: string;
-    status?: UserDto.StatusEnum;
-    roles?: Array<RoleDto>;
+    status?: User.StatusEnum;
+    address?: Address;
+    branch?: Branch;
+    customers?: Set<Customer>;
+    roles?: Set<Role>;
     createDate?: string;
     updateDate?: string;
 }
-export namespace UserDto {
+export namespace User {
     export type StatusEnum = 'ACTIVE' | 'INACTIVE' | 'DELETED';
     export const StatusEnum = {
         Active: 'ACTIVE' as StatusEnum,

@@ -62,6 +62,7 @@ export class SigninComponent implements OnDestroy, OnInit {
       this.authService.accessAccount(this.signInForm.value)
         .subscribe(
           (response: any) => {
+            console.log({ response });
             if ( response?.token && response?.id ) {
               this.authService.saveToken(response?.token, response?.id);
               this.redirectToDashboard();

@@ -21,16 +21,11 @@ public class Currency {
     @Id
     @GeneratedValue
     @UuidGenerator
-    @Column(updatable = false, nullable = false)
     private UUID id;
 
     @Size(max = 3)
     @Column( name="currency_code", nullable = false)
     private String currencyCode;
-
-    @Size(max = 50)
-    @Column( name="currency_name", nullable = false)
-    private String currencyName;
 
     @Size(max = 50)
     @Column( name="country", nullable = false)
