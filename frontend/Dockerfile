@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install --legacy-peer-deps
 COPY . .
-RUN npm run build --configuration=development --stats-json
+RUN npm run build --configuration=production --stats-json
 
 # Stage 2: Serve Angular app with NGINX
 FROM nginx:alpine
