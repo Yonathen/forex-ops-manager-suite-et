@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,8 +26,7 @@ public class UserDto {
     private String lastName;
     private String email;
     private EStatus status;
-    @JsonSerialize(contentAs = ArrayList.class)
-    private Set<RoleDto> roles;
+    private List<RoleDto> roles;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 }

@@ -1,5 +1,6 @@
 package com.yogaforex.backend.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -98,8 +99,9 @@ public class AuthController {
         user.setEmail(userDto.getEmail());
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());
+        logger.info("Registering user: {}", user.getLastName());
 
-        Set<RoleDto> roleDtos = userDto.getRoles();
+        List<RoleDto> roleDtos = userDto.getRoles().stream().toList();
         Set<Role> roles = new HashSet<>();
 
         if (roleDtos == null) {

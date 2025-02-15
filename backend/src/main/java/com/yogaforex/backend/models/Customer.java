@@ -68,10 +68,7 @@ public class Customer {
     private User user;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PaymentMethod> paymentMethods = new HashSet<>();
-
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<TravelDocument> travelDocuments = new HashSet<>();
+    private Set<BankAccount> bankAccounts = new HashSet<>();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Transaction> transactions = new HashSet<>();

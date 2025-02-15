@@ -11,6 +11,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -80,8 +82,8 @@ public class TravelDocument {
     @LastModifiedDate
     private LocalDateTime updateDate;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @OneToOne
+    @JoinColumn( name ="transaction_id")
+    private Transaction transaction;
 
 }
