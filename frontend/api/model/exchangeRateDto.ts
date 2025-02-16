@@ -15,8 +15,16 @@ export interface ExchangeRateDto {
     baseCurrency?: Currency;
     targetCurrency?: Currency;
     rate?: number;
-    transactionType?: string;
+    transactionType?: ExchangeRateDto.TransactionTypeEnum;
     createDate?: string;
     updateDate?: string;
 }
+export namespace ExchangeRateDto {
+    export type TransactionTypeEnum = 'PURCHASE' | 'SELL';
+    export const TransactionTypeEnum = {
+        Purchase: 'PURCHASE' as TransactionTypeEnum,
+        Sell: 'SELL' as TransactionTypeEnum
+    };
+}
+
 

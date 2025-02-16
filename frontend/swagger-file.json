@@ -1928,6 +1928,10 @@
             "type": "string",
             "format": "uuid"
           },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
           "baseCurrency": {
             "$ref": "#/components/schemas/Currency"
           },
@@ -1939,7 +1943,11 @@
             "format": "double"
           },
           "transactionType": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "PURCHASE",
+              "SELL"
+            ]
           },
           "createDate": {
             "type": "string",
@@ -2353,7 +2361,11 @@
             "format": "double"
           },
           "transactionType": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "PURCHASE",
+              "SELL"
+            ]
           },
           "createDate": {
             "type": "string",
