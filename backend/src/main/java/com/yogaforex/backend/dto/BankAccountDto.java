@@ -13,6 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class BankAccountDto {
     private UUID id;
+    private String bankName;
     private String accountNumber;
     private String createdAt;
     private String updatedAt;

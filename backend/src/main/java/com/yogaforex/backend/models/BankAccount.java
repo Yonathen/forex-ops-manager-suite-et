@@ -29,6 +29,9 @@ public class BankAccount {
     @Column(updatable = false, nullable = false)
     private UUID id;
 
+    @Column( name = "bank_name" )
+    private String bankName;
+
     @Column( name = "account_number" )
     private String accountNumber;
 
