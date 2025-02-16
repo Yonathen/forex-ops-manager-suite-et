@@ -17,6 +17,7 @@ import { UsersComponent } from '../users/users.component';
 
 
 @Component({
+  standalone: true,
   selector: 'app-branch-detail',
   imports: [
     CommonModule,

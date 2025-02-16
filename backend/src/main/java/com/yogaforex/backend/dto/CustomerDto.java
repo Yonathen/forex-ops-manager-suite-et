@@ -30,7 +30,7 @@ public class CustomerDto {
     private String identificationNumber;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-    private User user;
-    private Set<BankAccount> bankAccounts = new HashSet<>();
+    private UserPublicDto user;
+    private Set<BankAccountDto> bankAccounts = new HashSet<>();
     private Set<Transaction> transactions = new HashSet<>();
 }

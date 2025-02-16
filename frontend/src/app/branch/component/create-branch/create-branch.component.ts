@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Button } from 'primeng/button';
@@ -12,6 +12,7 @@ import { createBranchDetail } from '../../state/action/branch.action';
 import { selectBranchDetail } from '../../state/selector/branch.selector';
 
 @Component({
+  standalone: true,
   selector: 'app-create-branch',
   imports: [
     Button,
@@ -23,12 +24,13 @@ import { selectBranchDetail } from '../../state/selector/branch.selector';
   templateUrl: './create-branch.component.html',
   styleUrl: './create-branch.component.scss'
 })
-export class CreateBranchComponent {
+export class CreateBranchComponent implements OnInit, OnDestroy {
   public submitted: boolean = false;
   public createBranchMode: boolean = true;
   createBranchForm: FormGroup = new FormGroup({});
   savedBranchData: any = null;
   private branchSubscription!: Subscription;
+
   @Output() cancelCreateBranchDialogEmitter = new EventEmitter<boolean>();
   @Output() afterCreateCallbackEmitter = new EventEmitter<void>();
 
@@ -55,6 +57,7 @@ export class CreateBranchComponent {
 
   ngOnDestroy() {
     this.setUpForm();
+    this.branchSubscription?.unsubscribe();
   }
 
   get createdBranch(): BranchDto {

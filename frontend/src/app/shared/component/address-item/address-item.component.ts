@@ -7,6 +7,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { EAddressItem } from '../../enum/address-item';
 
 @Component({
+  standalone: true,
   selector: 'app-address-item',
   imports: [
     CommonModule,

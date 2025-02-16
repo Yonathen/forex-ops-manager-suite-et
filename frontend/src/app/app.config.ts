@@ -19,6 +19,8 @@ import { CurrentUserEffect } from './shared/state/effect/current-user.effect';
 import { globalReducer } from './shared/state/reducer/global.reducer';
 import { UserEffect } from './user/state/effect/user.effect';
 import { useReducer } from './user/state/reducer/user.reducer';
+import {customersReducer} from './customer/state/reducer/customer.reducer';
+import {CustomerEffect} from './customer/state/effect/customer.effect';
 
 export function appStorageFactory(): AppStorage {
   return new AppStorage(sessionStorage, localStorage);
@@ -45,14 +47,16 @@ export const appConfig: ApplicationConfig = {
         }
     }),
     provideStore({
-        branch: branchReducer,
-        global: globalReducer,
-        user: useReducer
+      customer: customersReducer,
+      branch: branchReducer,
+      global: globalReducer,
+      user: useReducer
     }),
     provideEffects([
         CurrentUserEffect,
         UserEffect,
-        BranchEffect
+        BranchEffect,
+        CustomerEffect,
     ]),
     provideStoreDevtools({
         maxAge: 25, // Retains last 25 states

@@ -17,6 +17,7 @@ git_push.sh
 index.ts
 model/address.ts
 model/bankAccount.ts
+model/bankAccountDto.ts
 model/branch.ts
 model/branchDto.ts
 model/currency.ts

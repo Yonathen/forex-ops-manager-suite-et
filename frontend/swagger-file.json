@@ -806,6 +806,87 @@
         }
       }
     },
+    "/api/customers/remove-account/{accountId}/{customerId}": {
+      "put": {
+        "tags": [
+          "customer-controller"
+        ],
+        "operationId": "removeAccountFromCustomer",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/customers/add-account/{customerId}": {
+      "put": {
+        "tags": [
+          "customer-controller"
+        ],
+        "operationId": "addAccountToCustomer",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankAccount"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/branches": {
       "get": {
         "tags": [
@@ -1697,6 +1778,9 @@
             "type": "string",
             "format": "uuid"
           },
+          "bankName": {
+            "type": "string"
+          },
           "accountNumber": {
             "type": "string"
           },
@@ -2281,6 +2365,27 @@
           }
         }
       },
+      "BankAccountDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        }
+      },
       "CustomerDto": {
         "type": "object",
         "properties": {
@@ -2324,13 +2429,13 @@
             "format": "date-time"
           },
           "user": {
-            "$ref": "#/components/schemas/User"
+            "$ref": "#/components/schemas/UserPublicDto"
           },
           "bankAccounts": {
             "uniqueItems": true,
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BankAccount"
+              "$ref": "#/components/schemas/BankAccountDto"
             }
           },
           "transactions": {

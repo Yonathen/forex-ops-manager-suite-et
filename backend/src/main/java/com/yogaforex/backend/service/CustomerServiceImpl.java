@@ -1,8 +1,8 @@
 package com.yogaforex.backend.service;
 
 import com.yogaforex.backend.dto.CustomerDto;
-import com.yogaforex.backend.models.Address;
-import com.yogaforex.backend.models.Customer;
+import com.yogaforex.backend.models.*;
+import com.yogaforex.backend.repository.BankAccountRepository;
 import com.yogaforex.backend.repository.CustomerRepository;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -13,19 +13,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final BankAccountRepository bankAccountRepository;
     private final ModelMapper modelMapper;
     public static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, ModelMapper modelMapper, UserService userService) {
+    public CustomerServiceImpl(CustomerRepository customerRepository, ModelMapper modelMapper, BankAccountRepository bankAccountRepository) {
         this.customerRepository = customerRepository;
         this.modelMapper = modelMapper;
+        this.bankAccountRepository = bankAccountRepository;
         configureMappings();
     }
 
@@ -56,11 +60,10 @@ public class CustomerServiceImpl implements CustomerService {
             existingCustomer.setIdentificationNumber(customer.getIdentificationNumber());
             existingCustomer.setIdentificationType(customer.getIdentificationType());
             existingCustomer.setMiddleName(customer.getMiddleName());
-            existingCustomer.setBankAccounts(customer.getBankAccounts());
 
             Address updatedAddress = customer.getAddress();
-            logger.info("Updated Address : email = {}", updatedAddress.getEmail());
             if (updatedAddress != null) {
+                logger.info("New Address : Email = {}", updatedAddress.getEmail());
                 Address address = getUpdatedAddress(existingCustomer.getAddress(), updatedAddress);
                 existingCustomer.setAddress(address);
             }
@@ -70,7 +73,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public Address getUpdatedAddress(Address address, Address updatedAddress) {
-        logger.info("Customer Address : email = {}", updatedAddress.getEmail());
+        logger.info("Customer Address : Email = {}", updatedAddress.getEmail());
 
         if (address == null) address = new Address();
 
@@ -90,6 +93,25 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public void deleteCustomer(UUID id) {
         customerRepository.deleteById(id);
+    }
+
+    @Override
+    public BankAccount addBankAccount(UUID id, BankAccount bankAccount) {
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
+        bankAccount.setCustomer(customer);
+        return bankAccountRepository.save(bankAccount);
+    }
+
+    @Override
+    public void removeBankAccount(UUID accountId, UUID customerId) {
+        BankAccount bankAccount = bankAccountRepository.findById(accountId)
+                .orElseThrow(() -> new RuntimeException("Bank Account not found"));
+
+        if (!bankAccount.getCustomer().getId().equals(customerId)) {
+            throw new RuntimeException("Bank Account does not belong to this customer");
+        }
+
+        bankAccountRepository.delete(bankAccount);
     }
 
     private void configureMappings() {

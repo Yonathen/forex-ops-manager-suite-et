@@ -13,6 +13,7 @@ import { Customer } from './customer';
 
 export interface BankAccount { 
     id?: string;
+    bankName?: string;
     accountNumber?: string;
     createdAt?: string;
     updatedAt?: string;

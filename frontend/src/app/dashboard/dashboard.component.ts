@@ -57,13 +57,18 @@ export class DashboardComponent  implements OnInit {
       },
       {
         label: 'Users',
-        icon: 'group',
+        icon: 'support_agent',
         command: () => this.router.navigateByUrl('/dashboard/users')
       },
       {
         label: 'Branches',
         icon: 'store',
         command: () => this.router.navigateByUrl('/dashboard/branches')
+      },
+      {
+        label: 'Customers',
+        icon: 'person',
+        command: () => this.router.navigateByUrl('/dashboard/customers')
       },
       {
         label: 'Reports',

@@ -1,0 +1,166 @@
+<div class="flex w-[30rem] h-[50rem]">
+    @if (createCustomerMode) {
+        <form [formGroup]="createCustomerForm" (ngSubmit)="onSubmit()" class="w-full h-fit">
+            <div class="flex flex-wrap content-center justify-center w-full h-fit">
+                <div class="bg-surface-0 p-6 w-[30rem] h-fit">
+
+                    <div class="flex flex-col gap-8 w-full py-4">
+                        <div class="flex flex-col gap-2">
+                        <p-floatlabel>
+                            <input
+                            pInputText
+                            id="first-name"
+                            autocomplete="off"
+                            class="w-full"
+                            formControlName="firstName"
+                            [ngClass]="{'ng-invalid ng-dirty': getFormControl('firstName')?.hasError('required') && submitted }"
+                            />
+                            <label for="first-name">First name</label>
+                        </p-floatlabel>
+                        @if ( getFormControl('firstName')?.hasError('required') && submitted) {
+                            <small id="first-name-help" class="text-red-600 px-3">First name is required</small>
+                        }
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-8 w-full py-4">
+                      <div class="flex flex-col gap-2">
+                        <p-floatlabel>
+                          <input
+                            pInputText
+                            id="middle-name"
+                            autocomplete="off"
+                            class="w-full"
+                            formControlName="middleName"
+                            [ngClass]="{'ng-invalid ng-dirty': getFormControl('middleName')?.hasError('required') && submitted }"
+                          />
+                          <label for="last-name">Middle name</label>
+                        </p-floatlabel>
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-8 w-full py-4">
+                      <div class="flex flex-col gap-2">
+                        <p-floatlabel>
+                          <input
+                            pInputText
+                            id="last-name"
+                            autocomplete="off"
+                            class="w-full"
+                            formControlName="lastName"
+                            [ngClass]="{'ng-invalid ng-dirty': getFormControl('lastName')?.hasError('required') && submitted }"
+                          />
+                          <label for="last-name">Last name</label>
+                        </p-floatlabel>
+                        @if ( getFormControl('lastName')?.hasError('required') && submitted) {
+                          <small id="last-name-help" class="text-red-600 px-3">Last name is required</small>
+                        }
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-8 w-full py-6">
+                      <div class="flex flex-col gap-2">
+                        <p-floatlabel>
+                          <p-datepicker id="date-birth" formControlName="dateOfBirth" showIcon />
+                          <label>Date of birth</label>
+                        </p-floatlabel>
+                        @if ( getFormControl('dateOfBirth')?.hasError('required') && submitted) {
+                          <small id="date-birth-help" class="text-red-600 px-3">Date of birth is required</small>
+                        }
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-8 w-full py-4">
+                      <div class="flex flex-col gap-2">
+                        <label for="identification-type">Identification type</label>
+                        <p-select
+                          id="identification-type"
+                          [options]="identificationTypeOptions"
+                          formControlName="identificationType"
+                          optionLabel="label"
+                          optionValue="value"
+                          placeholder="Select your identification type"
+                          [ngClass]="{'ng-invalid ng-dirty': getFormControl('identificationType')?.hasError('required') && submitted }"
+                        />
+                        @if ( getFormControl('identificationType')?.hasError('required') && submitted) {
+                          <small id="identification-type-help" class="text-red-600 px-3">Identification type is required</small>
+                        }
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-8 w-full py-4">
+                      <div class="flex flex-col gap-2">
+                        <p-floatlabel>
+                          <input
+                            pInputText
+                            id="identification-number"
+                            autocomplete="off"
+                            class="w-full"
+                            formControlName="identificationNumber"
+                            [ngClass]="{'ng-invalid ng-dirty': getFormControl('identificationNumber')?.hasError('required') && submitted }"
+                          />
+                          <label for="identification-number">Identification number</label>
+                        </p-floatlabel>
+                        @if ( getFormControl('identificationNumber')?.hasError('required') && submitted) {
+                          <small id="identification-number-help" class="text-red-600 px-3">Identification number is required</small>
+                        }
+                      </div>
+                    </div>
+
+                    <div class="flex gap-4 w-full py-4 justify-end gap-3">
+                        <p-button (click)="onCancel()" severity="secondary" label="Cancel" />
+                        <p-button type="submit" label="Create" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    } @else {
+        <div class="flex flex-wrap place-content-center justify-center w-full h-full">
+            <div class="flex w-[30rem] gap-8 p-3 bg-slate-50">
+                <div class="flex flex-wrap w-1/2 text-lg font-medium content-start">
+                    First name
+                </div>
+                <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                    {{savedCustomerData.firstName}}
+                </div>
+            </div>
+            <div class="flex w-[30rem] gap-8 p-3">
+                <div class="flex flex-wrap w-1/2 text-lg font-medium content-start">
+                    Last name
+                </div>
+                <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                    {{savedCustomerData.lastName}}
+                </div>
+            </div>
+            <div class="flex w-[30rem] gap-8 p-3">
+              <div class="flex flex-wrap w-1/2 text-lg font-medium content-start">
+                Date of birth
+              </div>
+              <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                {{savedCustomerData.dateOfBirth}}
+              </div>
+            </div>
+            <div class="flex w-[30rem] gap-8 p-3">
+              <div class="flex flex-wrap w-1/2 text-lg font-medium content-start">
+                Identification type
+              </div>
+              <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                {{savedCustomerData.identificationType}}
+              </div>
+            </div>
+            <div class="flex w-[30rem] gap-8 p-3">
+              <div class="flex flex-wrap w-1/2 text-lg font-medium content-start">
+                Identification number
+              </div>
+              <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                {{savedCustomerData.identificationNumber}}
+              </div>
+            </div>
+
+            <div class="flex flex-wrap w-[30rem] justify-end gap-3 p-3">
+                <p-button (click)="onCancel()" severity="secondary" label="Cancel" />
+                <p-button (click)="addAnother()" label="Add another" />
+            </div>
+        </div>
+    }
+</div>

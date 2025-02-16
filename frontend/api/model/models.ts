@@ -1,5 +1,6 @@
 export * from './address';
 export * from './bankAccount';
+export * from './bankAccountDto';
 export * from './branch';
 export * from './branchDto';
 export * from './currency';

@@ -1,11 +1,12 @@
 package com.yogaforex.backend.controller;
 
 import com.yogaforex.backend.dto.CustomerDto;
+import com.yogaforex.backend.dto.CustomerDto;
 import com.yogaforex.backend.dto.PaginatedResponseDTO;
-import com.yogaforex.backend.dto.UserPublicDto;
+import com.yogaforex.backend.models.BankAccount;
+import com.yogaforex.backend.models.Customer;
 import com.yogaforex.backend.models.Customer;
 import com.yogaforex.backend.models.Transaction;
-import com.yogaforex.backend.models.User;
 import com.yogaforex.backend.service.CustomerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,7 +72,7 @@ public class CustomerController {
             return ResponseEntity.notFound().build();
         }
 
-        logger.info("fetchAllUsersByCustomerId: Fetched customer by id before transform to public DTO : {}", customer.get());
+        logger.info("fetchAllAccountsByCustomerId: Fetched customer by id before transform to public DTO : {}", customer.get());
         CustomerDto customerDto = customerService.convertCustomerToCustomerDto(customer.get());
         return ResponseEntity.ok(customerDto.getTransactions());
     }
@@ -115,5 +116,29 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.convertCustomerToCustomerDto(customer.get()));
     }
 
+    @PutMapping("/add-account/{customerId}")
+    public ResponseEntity<CustomerDto> addAccountToCustomer(@PathVariable UUID customerId, @RequestBody BankAccount bankAccount) {
+        logger.info("Add account with account number of {} to customer with customer id of {}", bankAccount.getAccountNumber(), customerId);
+        BankAccount account = customerService.addBankAccount(customerId, bankAccount);
+        Optional<Customer> customer = customerService.getCustomerById(account.getCustomer().getId());
+        if (customer.isEmpty()) {
+            logger.info("Add Account : customer with id {} not found", customerId);
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(customerService.convertCustomerToCustomerDto(customer.get()));
+    }
+
+    @PutMapping("/remove-account/{accountId}/{customerId}")
+    public ResponseEntity<CustomerDto> removeAccountFromCustomer(@PathVariable UUID accountId, @PathVariable UUID customerId) {
+        logger.info("Remove role with role id of {} from account with account id of {}", accountId, customerId);
+        customerService.removeBankAccount(accountId, customerId);
+
+        Optional<Customer> customer = customerService.getCustomerById(customerId);
+        if (customer.isEmpty()) {
+            logger.info("Remove Account : customer with id {} not found", customerId);
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(customerService.convertCustomerToCustomerDto(customer.get()));
+    }
 }
 

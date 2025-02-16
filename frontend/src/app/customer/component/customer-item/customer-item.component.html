@@ -1,0 +1,25 @@
+<div class="flex w-full h-full gap-8 p-3" [ngClass]="{ 'bg-slate-50': isHighlighted }">
+    <div class="flex flex-wrap w-1/4 text-lg font-medium content-center">
+        {{ item }}
+    </div>
+
+    <ng-container *ngIf="!isEditMode; else editTemplate">
+        <div class="flex flex-wrap grow text-lg content-center">
+            {{ value }}
+        </div>
+        <div *ngIf="editable" class="flex w-fit content-center">
+            <i (click)="setEditMode()" class="material-icons-outlined cursor-pointer text-slate-500 hover:text-primary-600">edit</i>
+        </div>
+    </ng-container>
+
+    <ng-template #editTemplate>
+        <input
+            class="border border-gray-300 rounded-md px-2"
+            pInputText
+            [(ngModel)]="editableValue"
+            pTooltip="Enter: Save, Esc: Cancel"
+            tooltipEvent="focus"
+            (keyup)="onKeyup($event)"
+        />
+    </ng-template>
+</div>

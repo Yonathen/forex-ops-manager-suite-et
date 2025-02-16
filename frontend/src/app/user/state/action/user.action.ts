@@ -1,7 +1,7 @@
 import { createAction, props } from "@ngrx/store";
 import { PaginatedResponseDTOUserPublicDto, RoleDto, UserPublicDto } from "../../../../../api";
 import { IEntityState } from "../../../shared/interface/entity-state";
-import { PaginatedResponseState } from "../../../shared/interface/paginated-response-state";
+import { ResponseState } from "../../../shared/interface/response-state";
 import { UserPublicState } from "../../../shared/state/global.state";
 import { EUserActions } from "../../enum/user-actions";
 
@@ -42,7 +42,7 @@ export const fetchAllUsers = createAction(
 )
 export const fetchAllUsersCompleted = createAction(
     EUserActions.FetchAllUsersCompleted,
-    props<{ allUsers: PaginatedResponseState<PaginatedResponseDTOUserPublicDto> }>()
+    props<{ allUsers: ResponseState<PaginatedResponseDTOUserPublicDto> }>()
 )
 
 // Fetch all roles
