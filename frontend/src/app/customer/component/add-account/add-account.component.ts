@@ -69,6 +69,7 @@ export class AddAccountComponent implements OnInit, OnDestroy {
 
   setUpForm() {
     this.addAccountForm = this.fb.group({
+      bankName: [ {value: null, disabled: false}, [Validators.required] ],
       accountNumber: [ {value: null, disabled: false}, [Validators.required] ]
     })
   }

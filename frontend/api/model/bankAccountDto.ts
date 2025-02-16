@@ -7,17 +7,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Transaction } from './transaction';
-import { Customer } from './customer';
 
 
-export interface BankAccount { 
+export interface BankAccountDto { 
     id?: string;
     bankName?: string;
     accountNumber?: string;
     createdAt?: string;
     updatedAt?: string;
-    customer?: Customer;
-    transactions?: Set<Transaction>;
 }
 

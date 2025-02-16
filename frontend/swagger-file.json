@@ -1778,6 +1778,9 @@
             "type": "string",
             "format": "uuid"
           },
+          "bankName": {
+            "type": "string"
+          },
           "accountNumber": {
             "type": "string"
           },
@@ -2362,6 +2365,27 @@
           }
         }
       },
+      "BankAccountDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "bankName": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        }
+      },
       "CustomerDto": {
         "type": "object",
         "properties": {
@@ -2411,7 +2435,7 @@
             "uniqueItems": true,
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/BankAccount"
+              "$ref": "#/components/schemas/BankAccountDto"
             }
           },
           "transactions": {

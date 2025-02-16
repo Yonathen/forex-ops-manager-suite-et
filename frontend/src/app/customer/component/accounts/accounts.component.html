@@ -10,15 +10,19 @@
         <p-table [value]="accountsArray" stripedRows class="w-full">
             <ng-template #header>
                 <tr>
+                    <th>Bank name</th>
                     <th>Account number</th>
                     <th></th>
                 </tr>
             </ng-template>
             <ng-template #body let-account let-rowIndex="rowIndex">
                 <tr>
-                    <td>
-                        {{account.accountNumber}}
-                    </td>
+                  <td>
+                    {{account.bankName}}
+                  </td>
+                  <td>
+                    {{account.accountNumber}}
+                  </td>
                     <td>
                         <div class="flex justify-end">
                             <p-button
