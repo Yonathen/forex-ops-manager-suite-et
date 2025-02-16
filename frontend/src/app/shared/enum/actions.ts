@@ -6,6 +6,9 @@ export enum EActions {
     FetchExchangeRateById = '[ExchangeRate] Fetch exchange rate by id',
     FetchExchangeRateByIdCompleted = '[ExchangeRate] Fetch exchange rate by id completed',
 
+    FetchAllCurrencies = '[Currencies] Fetch all Currencies',
+    FetchAllCurrenciesCompleted = '[Currencies] Fetch all Currencies completed',
+
     FetchAllExchangeRates = '[ExchangeRate] Fetch all exchange rates',
     FetchAllExchangeRatesCompleted = '[ExchangeRate] Fetch all exchange rates completed',
 

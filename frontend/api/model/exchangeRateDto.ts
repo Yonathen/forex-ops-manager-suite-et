@@ -12,6 +12,7 @@ import { Currency } from './currency';
 
 export interface ExchangeRateDto { 
     id?: string;
+    date?: string;
     baseCurrency?: Currency;
     targetCurrency?: Currency;
     rate?: number;

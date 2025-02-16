@@ -9,7 +9,7 @@ import { PanelMenu } from 'primeng/panelmenu';
 import { Observable } from 'rxjs';
 import { UserPublicDto } from '../../../api';
 import { AuthService } from '../auth/service/auth.service';
-import { loadCurrentUser } from '../shared/state/action/global.actions';
+import {fetchAllCurrencies, loadCurrentUser} from '../shared/state/action/global.actions';
 import { GlobalState } from '../shared/state/global.state';
 import { selectCurrentUser, selectCurrentUserLoading } from '../shared/state/selector/global.selector';
 
@@ -43,6 +43,7 @@ export class DashboardComponent  implements OnInit {
     this.setMenuItems();
     const id = this.authService.getCurrentUserId();
     id && this.store.dispatch(loadCurrentUser({ id }));
+    this.store.dispatch(fetchAllCurrencies())
     this.store.select(selectCurrentUser).subscribe(user => console.log({ user }));
     this.user$ = this.store.select(selectCurrentUser);
     this.userLoading$ = this.store.select(selectCurrentUserLoading)

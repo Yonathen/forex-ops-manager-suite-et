@@ -17,7 +17,7 @@
             </p-menu>
             <div class="flex justify-end w-full gap-4">
                 <p-button (click)="setCreateExchangeRateDialogVisibility()" severity="secondary" [outlined]="true">
-                    <i class="material-icons-outlined">person_add</i>
+                    <i class="material-icons-outlined">add</i>
                 </p-button>
             </div>
             <p-table
@@ -61,8 +61,8 @@
     </div>
 </div>
 
-<!--<p-dialog header="Create new exchangeRate" [modal]="true" [(visible)]="isCreateExchangeRateDialogVisible" >-->
-<!--    <app-create-exchangeRate-->
-<!--        (afterCreateCallbackEmitter)="afterCreateCallback()"-->
-<!--        (cancelCreateExchangeRateDialogEmitter)="setCreateExchangeRateDialogVisibility(false)" />-->
-<!--</p-dialog>-->
+<p-dialog header="Create new exchange rate" [modal]="true" [(visible)]="isCreateExchangeRateDialogVisible" >
+    <app-create-exchange-rate
+        (afterCreateCallbackEmitter)="afterCreateCallback()"
+        (cancelCreateExchangeRateDialogEmitter)="setCreateExchangeRateDialogVisibility(false)" />
+</p-dialog>

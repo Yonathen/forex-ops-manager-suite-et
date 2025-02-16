@@ -1,11 +1,21 @@
 import { createReducer, on } from "@ngrx/store";
 import {
-  createExchangeRateDetail, createExchangeRateDetailCompleted, fetchAllExchangeRates,
-  fetchAllExchangeRatesCompleted, fetchExchangeRateById, fetchExchangeRateByIdCompleted,
+  createExchangeRateDetail,
+  createExchangeRateDetailCompleted,
+  fetchAllCurrencies,
+  fetchAllCurrenciesCompleted,
+  fetchAllExchangeRates,
+  fetchAllExchangeRatesCompleted,
+  fetchExchangeRateById,
+  fetchExchangeRateByIdCompleted,
   loadCurrentUser,
-  loadCurrentUserCompleted, removeExchangeRateDetail, removeExchangeRateDetailCompleted,
+  loadCurrentUserCompleted,
+  removeExchangeRateDetail,
+  removeExchangeRateDetailCompleted,
   updateCurrentUser,
-  updateCurrentUserCompleted, updateExchangeRateDetail, updateExchangeRateDetailCompleted
+  updateCurrentUserCompleted,
+  updateExchangeRateDetail,
+  updateExchangeRateDetailCompleted
 } from "../action/global.actions";
 import { GlobalState } from "../global.state";
 
@@ -19,7 +29,7 @@ export const globalReducer = createReducer(
     // Update user
     on(updateCurrentUser, (state) => ({ ...state, user: { loading: true }}) ),
     on(updateCurrentUserCompleted, (state, { user }) => ({ ...state, user })),
-    
+
     // Fetch exchangeRate by id
     on(fetchExchangeRateById, (state) => ({ ...state, exchangeRateDetail: { loading: true } })),
     on(fetchExchangeRateByIdCompleted, (state, { exchangeRateDetail }) => ({ ...state, exchangeRateDetail })),
@@ -39,4 +49,8 @@ export const globalReducer = createReducer(
     // Fetch all exchangeRates by page
     on(fetchAllExchangeRates, (state) => ({ ...state, allExchangeRates: { loading: true }}) ),
     on(fetchAllExchangeRatesCompleted, (state, { allExchangeRates }) => ({ ...state, allExchangeRates })),
+
+    // Fetch all currencies by page
+    on(fetchAllCurrencies, (state) => ({ ...state, allCurrencies: { loading: true }}) ),
+    on(fetchAllCurrenciesCompleted, (state, { allCurrencies }) => ({ ...state, allCurrencies })),
 )

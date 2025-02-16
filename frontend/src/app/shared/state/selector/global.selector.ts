@@ -16,3 +16,8 @@ export const selectExchangeRateDetailLoading = createSelector( globalState, ({ e
 export const selectAllExchangeRates= createSelector( globalState, ({ allExchangeRates}) => allExchangeRates?.data || null);
 export const selectAllExchangeRateError = createSelector( globalState, ({ allExchangeRates}) => allExchangeRates?.error || null);
 export const selectAllExchangeRateLoading = createSelector( globalState, ({ allExchangeRates}) => allExchangeRates?.loading || false);
+
+// Select all exchangeRates
+export const selectAllCurrencies= createSelector( globalState, ({ allCurrencies}) => allCurrencies?.data || null);
+export const selectAllCurrenciesError = createSelector( globalState, ({ allCurrencies}) => allCurrencies?.error || null);
+export const selectAllCurrenciesLoading = createSelector( globalState, ({ allCurrencies}) => allCurrencies?.loading || false);

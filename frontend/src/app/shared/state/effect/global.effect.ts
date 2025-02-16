@@ -5,7 +5,7 @@ import {ExchangeRateDto, UserDto, UserPublicDto} from '../../../../../api';
 import { UserService } from '../../../user/service/user.service';
 import {
   createExchangeRateDetail,
-  createExchangeRateDetailCompleted,
+  createExchangeRateDetailCompleted, fetchAllCurrencies, fetchAllCurrenciesCompleted,
   fetchAllExchangeRates, fetchAllExchangeRatesCompleted,
   fetchExchangeRateById,
   fetchExchangeRateByIdCompleted,
@@ -109,6 +109,18 @@ export class GlobalEffect {
         return this.exchangeRateService.fetchAllExchangeRates(action.page, action.size).pipe(
           map((data) => fetchAllExchangeRatesCompleted({ allExchangeRates: { loading: false, data } })),
           catchError((error) => of(fetchAllExchangeRatesCompleted({ allExchangeRates: { loading: false, error }})))
+        )
+      })
+    )
+  })
+
+  fetchAllCurrencies$ = createEffect(() => {
+    return this.actions$?.pipe(
+      ofType(fetchAllCurrencies),
+      exhaustMap((action) => {
+        return this.exchangeRateService.fetchAllCurrencies().pipe(
+          map((data) => fetchAllCurrenciesCompleted({ allCurrencies: { loading: false, data } })),
+          catchError((error) => of(fetchAllCurrenciesCompleted({ allCurrencies: { loading: false, error }})))
         )
       })
     )

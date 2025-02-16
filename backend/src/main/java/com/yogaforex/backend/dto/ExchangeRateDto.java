@@ -16,6 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ExchangeRateDto {
     private UUID id;
+    private LocalDateTime date;
     private Currency baseCurrency;
     private Currency targetCurrency;
     private Double rate;

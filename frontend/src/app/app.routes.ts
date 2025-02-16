@@ -14,6 +14,9 @@ import { UserComponent } from './user/user.component';
 import {CustomerComponent} from './customer/customer.component';
 import {CustomerDetailComponent} from './customer/component/customer-detail/customer-detail.component';
 import {ExchangeRateComponent} from './exchange-rate/exchange-rate.component';
+import {
+  ExchangeRateDetailComponent
+} from './exchange-rate/component/exchange-rate-detail/exchange-rate-detail.component';
 
 export const routes: Routes = [
   { path: 'sign-in', component: SigninComponent },
@@ -33,6 +36,7 @@ export const routes: Routes = [
       { path: 'customers', component: CustomerComponent },
       { path: 'customers/:id', component: CustomerDetailComponent },
       { path: 'exchange-rates', component: ExchangeRateComponent },
+      { path: 'exchange-rates/:id', component: ExchangeRateDetailComponent },
       { path: 'reports', component: ReportComponent },
       { path: 'profile', component: ProfileComponent }
     ],

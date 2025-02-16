@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   BankAccount,
-  BranchDto,
+  BranchDto, Currency,
   ExchangeRateControllerService,
   ExchangeRateDto,
   PaginatedResponseDTOUserPublicDto,
@@ -37,6 +37,10 @@ export class ExchangeRateService {
 
   fetchAllExchangeRates(page: number, size: number): Observable<PaginatedResponseDTOUserPublicDto>{
     return this.exchangeRateControllerService.fetchAllExchangeRates(page, size);
+  }
+
+  fetchAllCurrencies(): Observable<Array<Currency>>{
+    return this.exchangeRateControllerService.fetchAllCurrencies();
   }
 
 }

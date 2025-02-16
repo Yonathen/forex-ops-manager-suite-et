@@ -1,0 +1,144 @@
+<div class="flex w-[30rem] h-[50rem]">
+    @if (createExchangeRateMode) {
+        <form [formGroup]="createExchangeRateForm" (ngSubmit)="onSubmit()" class="w-full h-fit">
+            <div class="flex flex-wrap content-center justify-center w-full h-fit">
+                <div class="bg-surface-0 p-6 w-[30rem] h-fit">
+
+                  <div class="flex flex-col gap-8 w-full py-6">
+                    <div class="flex flex-col gap-2">
+                      <label>Date</label>
+                      <p-datepicker id="date" formControlName="date" showIcon />
+                      @if ( getFormControl('dateOfBirth')?.hasError('required') && submitted) {
+                        <small id="date-birth-help" class="text-red-600 px-3">Date is required</small>
+                      }
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col gap-8 w-full py-4">
+                    <div class="flex flex-col gap-2">
+                      <label for="identification-type">Base currency</label>
+                      <p-select
+                        id="base-currency"
+                        [options]="currencyOptions"
+                        formControlName="baseCurrency"
+                        optionLabel="label"
+                        optionValue="value"
+                        placeholder="Select base currency"
+                        [ngClass]="{'ng-invalid ng-dirty': getFormControl('baseCurrency')?.hasError('required') && submitted }"
+                      />
+                      @if ( getFormControl('baseCurrency')?.hasError('required') && submitted) {
+                        <small id="base-currency-help" class="text-red-600 px-3">Base currency is required</small>
+                      }
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col gap-8 w-full py-4">
+                    <div class="flex flex-col gap-2">
+                      <label for="identification-type">Target currency</label>
+                      <p-select
+                        id="target-currency"
+                        [options]="currencyOptions"
+                        formControlName="targetCurrency"
+                        optionLabel="label"
+                        optionValue="value"
+                        placeholder="Select target currency"
+                        [ngClass]="{'ng-invalid ng-dirty': getFormControl('targetCurrency')?.hasError('required') && submitted }"
+                      />
+                      @if ( getFormControl('baseCurrency')?.hasError('required') && submitted) {
+                        <small id="target-currency-help" class="text-red-600 px-3">Target currency is required</small>
+                      }
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col gap-8 w-full py-4">
+                    <div class="flex flex-col gap-2">
+                      <label for="identification-type">Identification type</label>
+                      <p-select
+                        id="identification-type"
+                        [options]="transactionTypeOptions"
+                        formControlName="transactionType"
+                        optionLabel="label"
+                        optionValue="value"
+                        placeholder="Select transaction type"
+                        [ngClass]="{'ng-invalid ng-dirty': getFormControl('transactionType')?.hasError('required') && submitted }"
+                      />
+                      @if ( getFormControl('transactionType')?.hasError('required') && submitted) {
+                        <small id="transaction-type-help" class="text-red-600 px-3">Transaction type is required</small>
+                      }
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col gap-8 w-full py-4">
+                    <div class="flex flex-col gap-2">
+                      <label for="rate_label">Rate</label>
+                      <p-inputnumber
+                        inputId="rate_label"
+                        mode="decimal"
+                        [ngClass]="{'ng-invalid ng-dirty': getFormControl('rate')?.hasError('required') && submitted }"
+                        locale="en-US"
+                        [minFractionDigits]="2"
+                        formControlName="rate"
+                      />
+                      @if ( getFormControl('rate')?.hasError('required') && submitted) {
+                        <small id="rate-help" class="text-red-600 px-3">Rate is required</small>
+                      }
+                    </div>
+                  </div>
+
+                    <div class="flex gap-4 w-full py-4 justify-end gap-3">
+                        <p-button (click)="onCancel()" severity="secondary" label="Cancel" />
+                        <p-button type="submit" label="Create" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    } @else {
+        <div class="flex flex-wrap place-content-center justify-center w-full h-full">
+            <div class="flex w-[30rem] gap-8 p-3 bg-slate-50">
+                <div class="flex flex-wrap w-1/2 text-lg font-medium content-start">
+                  Date
+                </div>
+                <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                    {{savedExchangeRateData.date}}
+                </div>
+            </div>
+            <div class="flex w-[30rem] gap-8 p-3 bg-slate-50">
+              <div class="flex flex-wrap w-1/2 text-lg font-medium content-start">
+                Base currency
+              </div>
+              <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                {{savedExchangeRateData.baseCurrency.currencyCode}}
+              </div>
+            </div>
+            <div class="flex w-[30rem] gap-8 p-3">
+                <div class="flex flex-wrap w-1/2 text-lg font-medium content-start">
+                    Target currency
+                </div>
+                <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                    {{savedExchangeRateData.targetCurrency.currencyCode}}
+                </div>
+            </div>
+            <div class="flex w-[30rem] gap-8 p-3">
+              <div class="flex flex-wrap w-1/2 text-lg font-medium content-start">
+                Rate
+              </div>
+              <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                {{savedExchangeRateData.rate}}
+              </div>
+            </div>
+            <div class="flex w-[30rem] gap-8 p-3">
+              <div class="flex flex-wrap w-1/2 text-lg font-medium content-start">
+                Transaction type
+              </div>
+              <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                {{savedExchangeRateData.transactionType}}
+              </div>
+            </div>
+
+            <div class="flex flex-wrap w-[30rem] justify-end gap-3 p-3">
+                <p-button (click)="onCancel()" severity="secondary" label="Cancel" />
+                <p-button (click)="addAnother()" label="Add another" />
+            </div>
+        </div>
+    }
+</div>

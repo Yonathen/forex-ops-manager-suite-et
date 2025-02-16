@@ -13,7 +13,7 @@ import {ExchangeRateDto, PaginatedResponseDTOExchangeRateDto} from '../../../api
 import {GlobalState} from '../shared/state/global.state';
 import {selectAllExchangeRates, selectExchangeRateDetail} from '../shared/state/selector/global.selector';
 import {fetchAllExchangeRates, removeExchangeRateDetail} from '../shared/state/action/global.actions';
-// import { CreateExchangeRateComponent } from './component/create-exchangeRate/create-exchange-rate.component';
+import {CreateExchangeRateComponent} from './component/create-exchange-rate/create-exchange-rate.component';
 
 @Component({
   standalone: true,
@@ -25,7 +25,7 @@ import {fetchAllExchangeRates, removeExchangeRateDetail} from '../shared/state/a
     ButtonModule,
     MenuModule,
     DialogModule,
-    // CreateExchangeRateComponent
+    CreateExchangeRateComponent
   ],
   templateUrl: './exchange-rate.component.html',
   styleUrl: './exchange-rate.component.scss'
@@ -62,6 +62,7 @@ export class ExchangeRateComponent implements OnInit, OnDestroy {
     this.exchangeRateSubscription = this.store
       .select(selectAllExchangeRates)
       .subscribe((paginatedResponse) => {
+        console.log({ paginatedResponse })
         this.paginatedResponse = paginatedResponse;
         this.exchangeRates = paginatedResponse?.content || [];
         this.totalRecords = paginatedResponse?.total || 0;
@@ -84,11 +85,11 @@ export class ExchangeRateComponent implements OnInit, OnDestroy {
 
   setMenuItems() {
     this.rowMenuItems = [
-      {
-        label: 'Open detail',
-        icon: 'open_in_new',
-        command: () => this.viewExchangeRateDetail()
-      },
+      // {
+      //   label: 'Open detail',
+      //   icon: 'open_in_new',
+      //   command: () => this.viewExchangeRateDetail()
+      // },
       {
         label: 'Remove',
         icon: 'delete',

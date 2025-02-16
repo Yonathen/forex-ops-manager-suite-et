@@ -1,5 +1,11 @@
 import { createAction, props } from "@ngrx/store";
-import {ExchangeRateDto, ExchangeRate, PaginatedResponseDTOExchangeRateDto, UserPublicDto} from "../../../../../api";
+import {
+  ExchangeRateDto,
+  ExchangeRate,
+  PaginatedResponseDTOExchangeRateDto,
+  UserPublicDto,
+  Currency
+} from "../../../../../api";
 import { EActions } from "../../enum/actions";
 import { UserPublicState } from "../global.state";
 import {IEntityState} from '../../interface/entity-state';
@@ -22,6 +28,15 @@ export const loadCurrentUserCompleted = createAction(
     EActions.LoadCurrentUserCompleted,
     props<{ currentUser: UserPublicState }>()
 );
+
+// Fetch All Currencies
+export const fetchAllCurrencies = createAction(
+  EActions.FetchAllCurrencies
+)
+export const fetchAllCurrenciesCompleted = createAction(
+  EActions.FetchAllCurrenciesCompleted,
+  props<{ allCurrencies: IEntityState<Array<Currency>> }>()
+)
 
 // Fetch All ExchangeRates
 export const fetchAllExchangeRates = createAction(

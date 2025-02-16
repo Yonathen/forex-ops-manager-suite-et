@@ -1459,6 +1459,29 @@
         }
       }
     },
+    "/api/exchange-rates/currencies": {
+      "get": {
+        "tags": [
+          "exchange-rate-controller"
+        ],
+        "operationId": "fetchAllCurrencies",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Currency"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/customers/{id}": {
       "get": {
         "tags": [
@@ -2349,6 +2372,10 @@
           "id": {
             "type": "string",
             "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
           },
           "baseCurrency": {
             "$ref": "#/components/schemas/Currency"
