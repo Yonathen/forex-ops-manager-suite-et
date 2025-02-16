@@ -71,6 +71,11 @@ export class DashboardComponent  implements OnInit {
         command: () => this.router.navigateByUrl('/dashboard/customers')
       },
       {
+        label: 'Exchange rate',
+        icon: 'trending_up',
+        command: () => this.router.navigateByUrl('/dashboard/exchange-rates')
+      },
+      {
         label: 'Reports',
         icon: 'equalizer',
         command: () => this.router.navigateByUrl('/dashboard/reports')

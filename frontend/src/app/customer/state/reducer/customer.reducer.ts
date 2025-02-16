@@ -23,19 +23,19 @@ export const customersReducer = createReducer(
   initialCustomerState,
 
   // Fetch customer by id
-  on(fetchCustomerById, (state) => ({ ...state, currentCustomer: { loading: true } })),
+  on(fetchCustomerById, (state) => ({ ...state, customerDetail: { loading: true } })),
   on(fetchCustomerByIdCompleted, (state, { customerDetail }) => ({ ...state, customerDetail })),
 
   // Create customer
-  on(createCustomerDetail, (state) => ({ ...state, customer: { loading: true }}) ),
+  on(createCustomerDetail, (state) => ({ ...state, customerDetail: { loading: true }}) ),
   on(createCustomerDetailCompleted, (state, { customerDetail }) => ({ ...state, customerDetail })),
 
   // Remove customer
-  on(removeCustomerDetail, (state) => ({ ...state, customer: { loading: true }}) ),
+  on(removeCustomerDetail, (state) => ({ ...state, customerDetail: { loading: true }}) ),
   on(removeCustomerDetailCompleted, (state, { customerDetail }) => ({ ...state, customerDetail })),
 
   // Update customer
-  on(updateCustomerDetail, (state) => ({ ...state, customer: { loading: true }}) ),
+  on(updateCustomerDetail, (state) => ({ ...state, customerDetail: { loading: true }}) ),
   on(updateCustomerDetailCompleted, (state, { customerDetail }) => ({ ...state, customerDetail })),
 
   // Fetch all customeres by page

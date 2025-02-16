@@ -1,5 +1,6 @@
 package com.yogaforex.backend.dto;
 
+import com.yogaforex.backend.enums.ETransactionType;
 import com.yogaforex.backend.models.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +19,7 @@ public class ExchangeRateDto {
     private Currency baseCurrency;
     private Currency targetCurrency;
     private Double rate;
-    private String transactionType;
+    private ETransactionType transactionType;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 }

@@ -1,0 +1,68 @@
+<div class="flex flex-col h-full w-full">
+    <div class="flex w-full place-content-center h-[3rem] border-solid border-b border-gray-300 text-xl font-medium">
+        <div class="flex items-center grow text-xl font-medium">ExchangeRates</div>
+        <div class="flex w-fit"></div>
+    </div>
+    <div class="flex flex-wrap justify-center w-full grow py-6">
+        <div class="flex flex-col w-full gap-4">
+            <p-menu #menu [model]="rowMenuItems" class="w-full" [popup]="true">
+                <ng-template #item let-item>
+                    <a pRipple class="flex items-center px-4 py-2 cursor-pointer group">
+                        <i class="material-icons-outlined">{{item.icon}}</i>
+                        <span class="ml-2">
+                            {{ item.label }}
+                        </span>
+                    </a>
+                </ng-template>
+            </p-menu>
+            <div class="flex justify-end w-full gap-4">
+                <p-button (click)="setCreateExchangeRateDialogVisibility()" severity="secondary" [outlined]="true">
+                    <i class="material-icons-outlined">person_add</i>
+                </p-button>
+            </div>
+            <p-table
+                stripedRows
+                [value]="exchangeRates"
+                class="w-full"
+                [scrollable]="true"
+                scrollHeight="55vh"
+            >
+                <ng-template #header>
+                    <tr>
+                      <th>Date</th>
+                      <th>Base currency</th>
+                      <th>Target currency</th>
+                      <th>Transaction type</th>
+                      <th>rate</th>
+                      <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template #body let-exchangeRate>
+                    <tr>
+                      <td>{{ exchangeRate.date }}</td>
+                      <td>{{ exchangeRate.baseCurrency.currencyCode }}</td>
+                      <td>{{ exchangeRate.targetCurrency.currencyCode }}</td>
+                      <td>{{ exchangeRate.transactionType }}</td>
+                      <td>{{ exchangeRate.rate }}</td>
+                        <td class="w-[3rem]">
+                          <p-button (click)="toggleMenu($event, exchangeRate)" severity="secondary" size="small" [rounded]="true" [text]="true">
+                            <i class="material-icons-outlined">more_vert</i>
+                          </p-button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template #emptymessage>
+                    <tr>
+                        <td colspan="6">No exchange rates found.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<!--<p-dialog header="Create new exchangeRate" [modal]="true" [(visible)]="isCreateExchangeRateDialogVisible" >-->
+<!--    <app-create-exchangeRate-->
+<!--        (afterCreateCallbackEmitter)="afterCreateCallback()"-->
+<!--        (cancelCreateExchangeRateDialogEmitter)="setCreateExchangeRateDialogVisibility(false)" />-->
+<!--</p-dialog>-->

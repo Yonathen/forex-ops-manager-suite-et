@@ -1,6 +1,7 @@
 package com.yogaforex.backend.models;
 
 
+import com.yogaforex.backend.enums.ETransactionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,9 @@ public class ExchangeRate {
     @Column(updatable = false, nullable = false)
     private UUID id;
 
+    @Column(name = "date")
+    private LocalDateTime date;
+
     @ManyToOne
     @JoinColumn(name = "base_currency_id")
     private Currency baseCurrency;
@@ -38,7 +42,7 @@ public class ExchangeRate {
     private Double rate;
 
     @Column( name = "transaction_type" )
-    private String transactionType;
+    private ETransactionType transactionType;
 
     @CreatedDate
     @Column(updatable = false) // Ensure it's not updated
