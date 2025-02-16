@@ -2,8 +2,8 @@ package com.yogaforex.backend.controller;
 
 import com.yogaforex.backend.dto.ExchangeRateDto;
 import com.yogaforex.backend.dto.PaginatedResponseDTO;
+import com.yogaforex.backend.models.Currency;
 import com.yogaforex.backend.models.ExchangeRate;
-import com.yogaforex.backend.models.Transaction;
 import com.yogaforex.backend.service.ExchangeRateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/exchange-rates")
@@ -59,6 +56,11 @@ public class ExchangeRateController {
 
         logger.info("Fetched exchangeRate by id before transform to public DTO : {}", exchangeRate.get());
         return ResponseEntity.ok(exchangeRateService.convertExchangeRateToExchangeRateDto(exchangeRate.get()));
+    }
+
+    @GetMapping("/currencies")
+    public ResponseEntity<List<Currency>> fetchAllCurrencies() {
+        return ResponseEntity.ok(exchangeRateService.getAllCurrencies());
     }
 
     @PostMapping

@@ -2,7 +2,9 @@ package com.yogaforex.backend.service;
 
 import com.yogaforex.backend.dto.ExchangeRateDto;
 import com.yogaforex.backend.models.Address;
+import com.yogaforex.backend.models.Currency;
 import com.yogaforex.backend.models.ExchangeRate;
+import com.yogaforex.backend.repository.CurrencyRepository;
 import com.yogaforex.backend.repository.ExchangeRateRepository;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,10 +23,12 @@ import java.util.UUID;
 public class ExchangeRateServiceImpl implements ExchangeRateService {
 
     private final ExchangeRateRepository exchangeRateRepository;
+    private final CurrencyRepository currencyRepository;
     private final ModelMapper modelMapper;
     public static final Logger logger = LoggerFactory.getLogger(ExchangeRateServiceImpl.class);
 
-    public ExchangeRateServiceImpl(ExchangeRateRepository exchangeRateRepository, ModelMapper modelMapper) {
+    public ExchangeRateServiceImpl(ExchangeRateRepository exchangeRateRepository, CurrencyRepository currencyRepository, ModelMapper modelMapper) {
+        this.currencyRepository = currencyRepository;
         this.exchangeRateRepository = exchangeRateRepository;
         this.modelMapper = modelMapper;
         configureMappings();
@@ -38,6 +43,11 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     public Page<ExchangeRate> getAllExchangeRates(int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize); // Create Pageable instance
         return exchangeRateRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Currency> getAllCurrencies() {
+        return currencyRepository.findAll();
     }
 
     @Override

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CurrentUserEffect } from './current-user.effect';
+import { GlobalEffect } from './global.effect';
 
 describe('CurrentUserEffectService', () => {
-  let service: CurrentUserEffect;
+  let service: GlobalEffect;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CurrentUserEffect);
+    service = TestBed.inject(GlobalEffect);
   });
 
   it('should be created', () => {

@@ -1,0 +1,46 @@
+<div class="flex flex-col h-full w-full">
+    <div class="flex w-full h-[3rem] border-solid border-b border-gray-300 text-xl font-medium">
+        ExchangeRate
+    </div>
+    <div class="flex flex-wrap justify-center w-full grow py-6">
+        <div class="flex flex-col flex-wrap w-full md:w-1/2 pr-5">
+            <div class="flex flex-col w-full pb-4">
+              <app-exchangeRate-item
+                  (editExchangeRateItemEvent)="setItemInEditMode($event)"
+                  (saveExchangeRateItemEvent)="updateExchangeRateItem($event)"
+                  [isHighlighted]="true"
+                  [editable]="true"
+                  [item]="items.baseCurrency"
+                  [itemInEditMode]="itemInEditMode"
+                  [value]="exchangeRateDetail?.baseCurrency?.currencyCode" />
+
+              <app-exchangeRate-item
+                (editExchangeRateItemEvent)="setItemInEditMode($event)"
+                (saveExchangeRateItemEvent)="updateExchangeRateItem($event)"
+                [editable]="true"
+                [item]="items.targetCurrency"
+                [itemInEditMode]="itemInEditMode"
+                [value]="exchangeRateDetail?.targetCurrency?.currencyCode" />
+
+              <app-exchangeRate-item
+                  (editExchangeRateItemEvent)="setItemInEditMode($event)"
+                  (saveExchangeRateItemEvent)="updateExchangeRateItem($event)"
+                  [isHighlighted]="true"
+                  [item]="items.rate"
+                  [editable]="true"
+                  [itemInEditMode]="itemInEditMode"
+                  [value]="exchangeRateDetail?.rate" />
+
+              <app-exchangeRate-item
+                (editExchangeRateItemEvent)="setItemInEditMode($event)"
+                (saveExchangeRateItemEvent)="updateExchangeRateItem($event)"
+                [item]="items.transactionType"
+                [editable]="true"
+                [itemInEditMode]="itemInEditMode"
+                [value]="exchangeRateDetail?.transactionType" />
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -12,11 +12,20 @@ import { Currency } from './currency';
 
 export interface ExchangeRate { 
     id?: string;
+    date?: string;
     baseCurrency?: Currency;
     targetCurrency?: Currency;
     rate?: number;
-    transactionType?: string;
+    transactionType?: ExchangeRate.TransactionTypeEnum;
     createDate?: string;
     updateDate?: string;
 }
+export namespace ExchangeRate {
+    export type TransactionTypeEnum = 'PURCHASE' | 'SELL';
+    export const TransactionTypeEnum = {
+        Purchase: 'PURCHASE' as TransactionTypeEnum,
+        Sell: 'SELL' as TransactionTypeEnum
+    };
+}
+
 

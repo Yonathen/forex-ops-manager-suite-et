@@ -1,4 +1,5 @@
-import { UserPublicDto } from "../../../../api";
+import {Currency, ExchangeRateDto, PaginatedResponseDTOExchangeRateDto, UserPublicDto} from "../../../../api";
+import {IEntityState} from '../interface/entity-state';
 
 export interface UserPublicState {
     user?: UserPublicDto | null;
@@ -7,5 +8,8 @@ export interface UserPublicState {
 }
 
 export interface GlobalState {
-    currentUser?: UserPublicState
+  currentUser?: UserPublicState,
+  exchangeRateDetail?: IEntityState<ExchangeRateDto>,
+  allExchangeRates?: IEntityState<PaginatedResponseDTOExchangeRateDto>,
+  allCurrencies?: IEntityState<Array<Currency>>
 }

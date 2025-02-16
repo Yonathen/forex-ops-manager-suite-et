@@ -15,7 +15,7 @@ import { MyPreset } from './my-preset';
 import { AppStorage } from './shared/model/AppStorage';
 import { APP_DATA_STORAGE } from './shared/provider/storage';
 import { JwtInterceptor } from './shared/service/jwt-interceptor.service';
-import { CurrentUserEffect } from './shared/state/effect/current-user.effect';
+import { GlobalEffect } from './shared/state/effect/global.effect';
 import { globalReducer } from './shared/state/reducer/global.reducer';
 import { UserEffect } from './user/state/effect/user.effect';
 import { useReducer } from './user/state/reducer/user.reducer';
@@ -53,7 +53,7 @@ export const appConfig: ApplicationConfig = {
       user: useReducer
     }),
     provideEffects([
-        CurrentUserEffect,
+        GlobalEffect,
         UserEffect,
         BranchEffect,
         CustomerEffect,
