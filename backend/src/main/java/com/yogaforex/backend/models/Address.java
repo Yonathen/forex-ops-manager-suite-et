@@ -31,7 +31,6 @@ public class Address {
     @Id
     @GeneratedValue
     @UuidGenerator
-    @Column(updatable = false, nullable = false)
     private UUID id;
 
     @Size(max = 50)

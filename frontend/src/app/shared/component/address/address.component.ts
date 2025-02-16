@@ -5,6 +5,7 @@ import { AddressItemComponent } from '../address-item/address-item.component';
 
 @Component({
   selector: 'app-address',
+  standalone: true,
   imports: [
     AddressItemComponent
   ],
@@ -15,7 +16,7 @@ export class AddressComponent {
   @Input() address?: Address;
   itemInEditMode: EAddressItem | null = null;
   items = EAddressItem;
-  
+
   @Output() saveAddressChange = new EventEmitter<{ key: string, value?: string }>();
 
   setItemInEditMode(item: EAddressItem | null) {

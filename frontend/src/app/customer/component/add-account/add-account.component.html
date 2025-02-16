@@ -1,0 +1,49 @@
+<div class="flex h-fit w-[30rem] h-[20rem]">
+  @if (addAccountMode) {
+    <form [formGroup]="addAccountForm" (ngSubmit)="addAccount()" class="w-full h-fit">
+      <div class="flex flex-wrap content-center justify-center w-full h-fit">
+        <div class="bg-surface-0 p-6 w-[30rem] h-fit">
+          <div class="flex flex-col gap-8 w-full py-4">
+            <div class="flex flex-col gap-2">
+              <p-floatlabel>
+                <input
+                  pInputText
+                  id="account-number"
+                  autocomplete="off"
+                  class="w-full"
+                  formControlName="accountNumber"
+                  [ngClass]="{'ng-invalid ng-dirty': getFormControl('accountNumber')?.hasError('required') && submitted }"
+                />
+                <label for="account-number">Account number</label>
+              </p-floatlabel>
+              @if ( getFormControl('accountNumber')?.hasError('required') && submitted) {
+                <small id="account-number-help" class="text-red-600 px-3">Enter account number</small>
+              }
+            </div>
+          </div>
+
+          <div class="flex gap-4 w-full py-4 justify-end gap-3">
+            <p-button (click)="onCancel()" severity="secondary" label="Cancel" />
+            <p-button type="submit" label="Create" />
+          </div>
+        </div>
+      </div>
+    </form>
+  } @else {
+    <div class="flex flex-wrap place-content-center justify-center w-full h-full">
+      <div class="flex w-[30rem] gap-8 p-3 bg-slate-50">
+        <div class="flex flex-wrap w-1/2 text-lg font-medium content-start">
+          Account number
+        </div>
+        <div class="flex flex-col flex-wrap grow text-lg gap-2">
+          {{addedAccountData.accountNumber}}
+        </div>
+      </div>
+
+      <div class="flex flex-wrap w-[30rem] justify-end gap-3 p-3">
+        <p-button (click)="onCancel()" severity="secondary" label="Cancel" />
+        <p-button (click)="addAnother()" label="Add another" />
+      </div>
+    </div>
+  }
+</div>

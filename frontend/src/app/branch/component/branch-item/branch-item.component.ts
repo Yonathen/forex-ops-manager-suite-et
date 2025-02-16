@@ -7,6 +7,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { EBranchItem } from '../../enum/branch-item';
 
 @Component({
+  standalone: true,
   selector: 'app-branch-item',
   imports: [
     CommonModule,

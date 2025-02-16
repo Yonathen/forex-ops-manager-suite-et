@@ -11,6 +11,8 @@ import { PageNotFoundComponent } from './shared/component/page-not-found/page-no
 import { ProfileComponent } from './user/component/profile/profile.component';
 import { UserDetailComponent } from './user/component/user-detail/user-detail.component';
 import { UserComponent } from './user/user.component';
+import {CustomerComponent} from './customer/customer.component';
+import {CustomerDetailComponent} from './customer/component/customer-detail/customer-detail.component';
 
 export const routes: Routes = [
   { path: 'sign-in', component: SigninComponent },
@@ -27,6 +29,8 @@ export const routes: Routes = [
       { path: 'users/:id', component: UserDetailComponent },
       { path: 'branches', component: BranchComponent },
       { path: 'branches/:id', component: BranchDetailComponent },
+      { path: 'customers', component: CustomerComponent },
+      { path: 'customers/:id', component: CustomerDetailComponent },
       { path: 'reports', component: ReportComponent },
       { path: 'profile', component: ProfileComponent }
     ],

@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { TooltipModule } from 'primeng/tooltip';
-import { EAddressItem } from '../../enum/address-item';
+import { ECustomerItem } from '../../enum/customer-item';
 
 @Component({
+  selector: 'app-customer-item',
   standalone: true,
-  selector: 'app-address-item',
   imports: [
     CommonModule,
     FormsModule,
@@ -16,18 +16,18 @@ import { EAddressItem } from '../../enum/address-item';
     InputIconModule,
     TooltipModule
   ],
-  templateUrl: './address-item.component.html',
-  styleUrl: './address-item.component.scss'
+  templateUrl: './customer-item.component.html',
+  styleUrl: './customer-item.component.scss'
 })
-export class AddressItemComponent implements OnInit, OnChanges {
-  @Input() item?: EAddressItem;
+export class CustomerItemComponent implements OnInit, OnChanges {
+  @Input() item?: ECustomerItem;
   @Input() isHighlighted: boolean = false;
   @Input() editable: boolean = false;
-  @Input() itemInEditMode?: EAddressItem | null = null;
+  @Input() itemInEditMode?: ECustomerItem | null = null;
   @Input() value?: string;
 
-  @Output() editAddressItemEvent = new EventEmitter<EAddressItem | null>();
-  @Output() saveAddressItemEvent = new EventEmitter<string>();
+  @Output() editCustomerItemEvent = new EventEmitter<ECustomerItem | null>();
+  @Output() saveCustomerItemEvent = new EventEmitter<string>();
 
   editableValue?: string;
 
@@ -45,14 +45,14 @@ export class AddressItemComponent implements OnInit, OnChanges {
 
   setEditMode() {
     this.editableValue = this.value
-    this.editAddressItemEvent.emit(this.item);
+    this.editCustomerItemEvent.emit(this.item);
   }
 
   onKeyup(event: KeyboardEvent) {
-    if (event.key === 'Escape') this.editAddressItemEvent.emit(null);
+    if (event.key === 'Escape') this.editCustomerItemEvent.emit(null);
 
     if (event.key === 'Enter') {
-      this.saveAddressItemEvent.emit(this.editableValue);
+      this.saveCustomerItemEvent.emit(this.editableValue);
     }
   }
 }

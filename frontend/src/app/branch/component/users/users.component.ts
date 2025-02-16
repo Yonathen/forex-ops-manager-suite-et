@@ -11,6 +11,7 @@ import { BranchState } from '../../state/branch.state';
 import { AddUserComponent } from '../add-user/add-user.component';
 
 @Component({
+  standalone: true,
   selector: 'app-users',
   imports: [
     TableModule,

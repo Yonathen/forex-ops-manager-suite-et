@@ -14,6 +14,7 @@ import { addUserToBranch } from '../../state/action/branch.action';
 import { BranchState } from '../../state/branch.state';
 
 @Component({
+  standalone: true,
   selector: 'app-add-user',
   imports: [
     CommonModule,
@@ -51,7 +52,7 @@ export class AddUserComponent implements OnInit {
 
     this.userStore.dispatch(fetchUserByUsername({ username: this.username }));
   }
-  
+
   addUser() {
     const userId = this.userDetail?.id;
     const branchId = this.branchDetail?.id;

@@ -1,5 +1,5 @@
 
-export interface PaginatedResponseState<T> {
+export interface ResponseState<T> {
     loading: boolean,
     error?: any,
     data?: T

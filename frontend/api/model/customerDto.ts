@@ -7,9 +7,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { User } from './user';
 import { Address } from './address';
 import { Transaction } from './transaction';
+import { UserPublicDto } from './userPublicDto';
 import { BankAccount } from './bankAccount';
 
 
@@ -24,7 +24,7 @@ export interface CustomerDto {
     identificationNumber?: string;
     createDate?: string;
     updateDate?: string;
-    user?: User;
+    user?: UserPublicDto;
     bankAccounts?: Set<BankAccount>;
     transactions?: Set<Transaction>;
 }
