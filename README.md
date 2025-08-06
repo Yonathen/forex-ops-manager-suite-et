@@ -121,18 +121,6 @@ yoga-forex/
 - **Local**: `application.yml` - Local development configuration
 - **Docker**: `application-docker.yml` - Container environment configuration
 
-## 🧪 Testing
-
-```bash
-# Backend tests
-cd backend
-./mvnw test
-
-# Frontend tests
-cd frontend
-npm test
-```
-
 ## 📚 API Documentation
 
 The API is fully documented using OpenAPI 3.0 specification. Access the interactive documentation at:
