@@ -1,0 +1,61 @@
+<div class="flex flex-col flex-wrap w-full">
+    @if (editable) {
+        <div class="flex flex-wrap items-center w-full">
+            <div class="flex justify-start grow gap-4">
+                <p-button severity="secondary" [outlined]="true" (click)="setCreateUserDialogVisibility(true)">
+                    <i class="material-icons-outlined">add</i>
+                </p-button>
+            </div>
+        </div>
+    }
+    <div class="flex grow w-full">
+        <p-table [value]="roles" stripedRows class="w-full">
+            <ng-template #header>
+                <tr>
+                    <th>Module</th>
+                    <th>Access</th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-role let-rowIndex="rowIndex">
+                <tr>
+                    <td class="bg-slate-200 text-sm font-semibold">
+                        {{role.name?.replace("_", " ")}}
+                    </td>
+                    <td class="bg-slate-200">
+                        @if (editable) {
+                            <div class="flex justify-end">
+                                <p-button
+                                    class="flex w-[2rem] h-[2rem]"
+                                    icon="pi pi-times"
+                                    severity="danger"
+                                    [text]="true"
+                                    (click)="removeRoleFromUser(role)"
+                                />
+                            </div>
+                        }
+                    </td>
+                </tr>
+                @for (permission of role.permissions; track permission.id) {
+                    <tr>
+                        <td>
+                            <p-tag severity="secondary" class="w-fit h-[1.5rem]">
+                                {{permission.module.replace("_", " ")?.toLowerCase()}}
+                            </p-tag>
+                        </td>
+                        <td>
+                            <p-tag *ngIf="isReadAccess(permission.access)" class="w-fit h-[1.5rem]">
+                                {{permission.access}}
+                            </p-tag>
+                            <p-tag *ngIf="!isReadAccess(permission.access)" severity="warn" class="w-fit h-[1.5rem]">
+                                {{permission.access}}
+                            </p-tag>
+                        </td>
+                    </tr>
+                }
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<p-dialog header="Add new role" [modal]="true" [(visible)]="isAddRoleDialogVisible" >
+    <app-add-role [userDetail]="userDetail" />
+</p-dialog>

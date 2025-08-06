@@ -1,0 +1,28 @@
+{
+    "/development-api": {
+      "target": "http://128.199.63.45:8080",
+      "changeOrigin": true,
+      "logLevel": "debug",
+      "pathRewrite": {
+        "^/development-api": "/api"
+      }
+    },
+    "/localdocker-api": {
+      "target": "http://localhost:8080",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug",
+      "pathRewrite": {
+        "^/localdocker-api": "/api"
+      }
+    },
+    "/local-api": {
+      "target": "http://localhost:8001",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug",
+      "pathRewrite": {
+        "^/local-api": ""
+      }
+    }
+  }

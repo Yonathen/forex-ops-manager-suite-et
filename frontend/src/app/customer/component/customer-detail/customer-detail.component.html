@@ -1,0 +1,65 @@
+<div class="flex flex-col h-full w-full">
+    <div class="flex w-full h-[3rem] border-solid border-b border-gray-300 text-xl font-medium">
+        Customer
+    </div>
+    <div class="flex flex-wrap justify-center w-full grow py-6">
+        <div class="flex flex-col flex-wrap w-full md:w-1/2 pr-5">
+            <div class="flex flex-col w-full pb-4">
+              <div class="text-lg font-medium content-start pb-2">Detail</div>
+              <app-customer-item
+                  (editCustomerItemEvent)="setItemInEditMode($event)"
+                  (saveCustomerItemEvent)="updateCustomerItem($event)"
+                  [isHighlighted]="true"
+                  [editable]="true"
+                  [item]="items.firstName"
+                  [itemInEditMode]="itemInEditMode"
+                  [value]="customerDetail?.firstName" />
+
+              <app-customer-item
+                (editCustomerItemEvent)="setItemInEditMode($event)"
+                (saveCustomerItemEvent)="updateCustomerItem($event)"
+                [editable]="true"
+                [item]="items.middleName"
+                [itemInEditMode]="itemInEditMode"
+                [value]="customerDetail?.middleName" />
+
+              <app-customer-item
+                  (editCustomerItemEvent)="setItemInEditMode($event)"
+                  (saveCustomerItemEvent)="updateCustomerItem($event)"
+                  [isHighlighted]="true"
+                  [item]="items.lastName"
+                  [editable]="true"
+                  [itemInEditMode]="itemInEditMode"
+                  [value]="customerDetail?.lastName" />
+
+              <app-customer-item
+                (editCustomerItemEvent)="setItemInEditMode($event)"
+                (saveCustomerItemEvent)="updateCustomerItem($event)"
+                [item]="items.identificationType"
+                [editable]="true"
+                [itemInEditMode]="itemInEditMode"
+                [value]="customerDetail?.identificationType" />
+
+              <app-customer-item
+                (editCustomerItemEvent)="setItemInEditMode($event)"
+                (saveCustomerItemEvent)="updateCustomerItem($event)"
+                [isHighlighted]="true"
+                [item]="items.identificationNumber"
+                [editable]="true"
+                [itemInEditMode]="itemInEditMode"
+                [value]="customerDetail?.identificationNumber" />
+            </div>
+
+            <div class="flex flex-col w-full pt-4">
+              <div class="text-lg font-medium content-start pb-2">Accounts</div>
+              <app-accounts [accounts]="accounts" [customerDetail]="customerDetail" />
+            </div>
+        </div>
+        <div class="flex flex-col flex-wrap w-full md:w-1/2 pl-5">
+          <div class="flex flex-col w-full">
+            <div class="text-lg font-medium content-start pb-2">Address</div>
+            <app-address [address]="customerDetail?.address" (saveAddressChange)="updateAddressItem($event)" />
+          </div>
+        </div>
+    </div>
+</div>

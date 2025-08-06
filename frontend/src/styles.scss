@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* styles.scss */
+@import "primeicons/primeicons.css";
+
+/* Target the entire scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+  height: 8px; /* Height of the horizontal scrollbar */
+}
+
+/* Background of the scrollbar */
+::-webkit-scrollbar-track {
+  background: #CAD5E2; /* Light gray background */
+  border-radius: 4px;
+}
+
+/* Scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background: #90A1B9; /* Darker gray for the handle */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* Hover state of the scrollbar handle */
+::-webkit-scrollbar-thumb:hover {
+  background: #45556C; /* Darker gray on hover */
+}
+
+.p-button {
+  width: 100% !important;
+}

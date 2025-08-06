@@ -1,0 +1,55 @@
+<div class="flex flex-col h-fit w-[30rem] h-[30rem]">
+    <div class="flex flex-wrap content-center justify-center w-full h-fit">
+        <div class="flex p-6 w-[30rem] h-fit gap-2">
+            <div class="flex grow flex-col gap-2">
+                <p-floatlabel>
+                    <input
+                        pInputText
+                        id="username"
+                        [(ngModel)]="username"
+                        autocomplete="off"
+                        class="w-full" />
+                    <label for="username">User's username</label>
+                </p-floatlabel>
+            </div>
+            <div class="w-[3rem]">
+                <p-button icon="pi pi-search" severity="success" (click)="onSearch()" [raised]="true" />
+            </div>
+        </div>
+    </div>
+    <div *ngIf="searched && userDetail" class="flex flex-col w-full h-fit p-6">
+        <div class="flex gap-8 p-3 bg-slate-50">
+            <div class="flex flex-wrap w-1/4 text-lg font-medium content-start">
+                First name
+            </div>
+            <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                {{userDetail.firstName}}
+            </div>
+        </div>
+        <div class="flex gap-8 p-3">
+            <div class="flex flex-wrap w-1/4 text-lg font-medium content-start">
+                Last name
+            </div>
+            <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                {{userDetail.lastName}}
+            </div>
+        </div>
+        <div class="flex gap-8 p-3 bg-slate-50">
+            <div class="flex flex-wrap w-1/4 text-lg font-medium content-start">
+                Email
+            </div>
+            <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                {{userDetail.email}}
+            </div>
+        </div>
+        <div class="flex gap-8 p-3 justify-end">
+            <p-button label="Add user" [raised]="true" (click)="addUser()" />
+        </div>
+    </div>
+
+    <div *ngIf="searched && !userDetail" class="flex w-fit h-fit"> 
+        <div class="flex gap-8 p-3 bg-slate-50">
+            User not found
+        </div>
+    </div>
+</div>

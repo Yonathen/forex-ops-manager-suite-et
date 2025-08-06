@@ -1,0 +1,76 @@
+<div class="flex h-fit w-[30rem] h-[20rem]">
+    @if (createBranchMode) {
+        <form [formGroup]="createBranchForm" (ngSubmit)="onSubmit()" class="w-full h-fit">
+            <div class="flex flex-wrap content-center justify-center w-full h-fit">
+                <div class="bg-surface-0 p-6 w-[30rem] h-fit">
+                    <div class="flex flex-col gap-8 w-full py-4">
+                        <div class="flex flex-col gap-2">
+                        <p-floatlabel>
+                            <input
+                            pInputText
+                            id="name"
+                            autocomplete="off"
+                            class="w-full"
+                            formControlName="name"
+                            [ngClass]="{'ng-invalid ng-dirty': getFormControl('name')?.hasError('required') && submitted }"
+                            />
+                            <label for="name">Branch name</label>
+                        </p-floatlabel>
+                        @if ( getFormControl('name')?.hasError('required') && submitted) {
+                            <small id="name-help" class="text-red-600 px-3">Enter branch name</small>
+                        }
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-8 w-full py-4">
+                        <div class="flex flex-col gap-2">
+                        <p-floatlabel>
+                            <input
+                            pInputText
+                            id="branch-code"
+                            autocomplete="off"
+                            class="w-full"
+                            formControlName="branchCode"
+                            [ngClass]="{'ng-invalid ng-dirty': getFormControl('branchCode')?.hasError('required') && submitted }"
+                            />
+                            <label for="branch-code">Branch code</label>
+                        </p-floatlabel>
+                        @if ( getFormControl('branchCode')?.hasError('required') && submitted) {
+                            <small id="branch-code-help" class="text-red-600 px-3">Enter branch code</small>
+                        }
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 w-full py-4 justify-end gap-3">
+                        <p-button (click)="onCancel()" severity="secondary" label="Cancel" />
+                        <p-button type="submit" label="Create" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    } @else {
+        <div class="flex flex-wrap place-content-center justify-center w-full h-full">
+            <div class="flex w-[30rem] gap-8 p-3 bg-slate-50">
+                <div class="flex flex-wrap w-1/4 text-lg font-medium content-start">
+                    Branch name
+                </div>
+                <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                    {{savedBranchData.name}}
+                </div>
+            </div>
+            <div class="flex w-[30rem] gap-8 p-3">
+                <div class="flex flex-wrap w-1/4 text-lg font-medium content-start">
+                    Branch code
+                </div>
+                <div class="flex flex-col flex-wrap grow text-lg gap-2">
+                    {{savedBranchData.branchCode}}
+                </div>
+            </div>
+
+            <div class="flex flex-wrap w-[30rem] justify-end gap-3 p-3">
+                <p-button (click)="onCancel()" severity="secondary" label="Cancel" />
+                <p-button (click)="addAnother()" label="Add another" />
+            </div>
+        </div>
+    }
+</div>
